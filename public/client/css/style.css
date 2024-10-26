@@ -1,0 +1,56 @@
+.html {
+    font-family: "Roboto", sans-serif;
+    box-sizing: border-box;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/* css main */
+.main {
+    margin: 12px;
+}
+
+/*end css main*/
+
+/*css header*/
+.header {
+    margin-top: 12px;
+    font-size: 28px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 12px;
+    flex: 1px;
+}
+
+.header > .left-header a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.header > .right-header a {
+    text-decoration: none;
+    margin-left: 24px;
+    color: #000000;
+}
+
+/* end css header*/
+
+/*css footer*/
+
+.footer {
+    border-top: 1px solid #000000;
+    margin-top: 12px;
+    padding-top: 12px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: start;
+}
+
+/*end css footer*/

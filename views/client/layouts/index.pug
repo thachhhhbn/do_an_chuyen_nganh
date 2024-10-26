@@ -9,11 +9,8 @@ html(lang="en")
     body
         .main
             include ../partials/header.pug
-            .content(style="display:flex;")
-                .div(style="width:20%")
-                    include ../partials/sidebar.pug
-                .div(style="width:80%")
-                    block container
+            block container
+            include ../partials/footer.pug
 
 script(src="./client/js/script.js")
 script(src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz' crossorigin='anonymous')
