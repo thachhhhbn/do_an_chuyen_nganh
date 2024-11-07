@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 const modelSchema = new mongoose.Schema(
     {
-        modelID: String,
-        name: String,
+        id: String,
+        ten: String,
         mssv: String,
-        gender: String,
-        major: String,
-        birth: Date,
-        role: String,
-        jobDescription: String,
+        gioitinh: String,
+        chuyen_nganh: String,
+        ngaysinh: String,
+        vaitro: String,
+        description: String,
     }
 );
 const model = mongoose.model("STUDENT", modelSchema);

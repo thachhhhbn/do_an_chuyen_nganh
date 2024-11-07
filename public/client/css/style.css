@@ -10,7 +10,6 @@
 
 /* css main */
 .main {
-    margin: 12px;
     display: flex;
     flex-flow: column nowrap;
 }
@@ -33,14 +32,24 @@
 
 .header > .left-header a {
     text-decoration: none;
-    color: #000000;
+    background-color: #FF8000;
+    color: #ffffff;
+    border-radius: 4px;
+    display: flex;
+    width: 116px;
+    height: 52px;
+    align-items: center;
+    justify-content: center;
+    margin-left: 16px;
 }
 
 .header > .right-header a {
     text-decoration: none;
     margin-left: 24px;
     color: #000000;
+    margin-right: 16px;
 }
+
 
 /* end css header*/
 
@@ -49,7 +58,8 @@
 .center {
     margin-left: auto;
     margin-right: auto;
-    min-height: 490px;
+    /*min-height: 490px;*/
+    min-height: 512px;
 }
 
 /*end css calculator*/
@@ -65,12 +75,19 @@
     flex-flow: column nowrap;
     justify-content: center;
     align-items: start;
+    background-color: #4C1F7A;
+    color: #ffffff;
+
+}
+
+.left-footer {
+    margin-left: 16px;
+    padding-bottom: 24px;
 }
 
 /*end css footer*/
 
 /*css LVT*/
-
 
 
 /* Container */
@@ -143,8 +160,9 @@ input[type="text"]:focus {
     border-color: #007bff;
     box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
 }
+
 /*css ngang cho 2 container*/
-.content{
+.content {
     display: flex;
     flex-flow: row nowrap;
 }
@@ -183,6 +201,7 @@ input[type="text"]:focus {
     transition: background-image 0.3s ease, transform 0.3s ease;
     margin-top: 20px;
 }
+
 /* CSS cho nút Tính toán */
 #calculateBtn {
     display: block;
@@ -203,6 +222,7 @@ input[type="text"]:focus {
 #calculateBtn:hover {
     background-color: #0056b3;
 }
+
 /* CSS cho nút Chi tiết */
 .detail-button {
     padding: 10px;
@@ -240,25 +260,17 @@ button:hover {
     background-image: linear-gradient(45deg, #b34800, #7f4800);
     transform: translateY(-3px);
 }
+
 /* Adjust the main container to not overlap with the fixed navbar */
 .container {
-    margin-top: 60px; /* Để khoảng trống phía trên để tránh trùng với navbar */
+    margin-top: 21px; /* Để khoảng trống phía trên để tránh trùng với navbar */
 }
+
 /* Thẻ sinh viên */
 /* Container cho danh sách sinh viên */
 /* Container cho danh sách sinh viên */
 /* Đảm bảo container rộng toàn bộ và các thẻ sinh viên xếp theo hàng ngang */
 /* Căn chỉnh phần Danh Sách Sinh Viên */
-#studentList {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    max-width: 800px; /* Điều chỉnh để phù hợp với số lượng thẻ và không dư khoảng trống */
-    gap: 20px;
-    margin: 0 auto; /* Căn giữa container nếu cần */
-    flex-wrap: nowrap;
-}
-
 
 
 /* Chi tiết sinh viên */
@@ -305,24 +317,24 @@ button:hover {
 
 /* Thẻ sinh viên */
 .student-card {
-    width: 200px;
+    display: flex;
+    flex-flow: row nowrap;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
     text-align: center;
     margin: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: inline-block;
     vertical-align: top;
 }
 
 .student-img {
-    width: 150px;           /* Chiều rộng cố định cho ảnh */
-    height: 150px;          /* Chiều cao cố định cho ảnh */
-    border-radius: 50%;     /* Làm ảnh thành hình tròn */
-    object-fit: cover;      /* Giúp ảnh tự động căn chỉnh để lấp đầy khung hình tròn */
+    width: 150px; /* Chiều rộng cố định cho ảnh */
+    height: 150px; /* Chiều cao cố định cho ảnh */
+    border-radius: 50%; /* Làm ảnh thành hình tròn */
+    object-fit: cover; /* Giúp ảnh tự động căn chỉnh để lấp đầy khung hình tròn */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;    /* Khoảng cách phía dưới ảnh */
+    margin-bottom: 10px; /* Khoảng cách phía dưới ảnh */
 }
 
 .student-card h3 {
@@ -351,6 +363,29 @@ button:hover {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+.card-model {
+    padding: 4px 12px 0;
+    margin: 0 24px 0;
+}
+
+.btn-chitiet {
+    text-decoration: none;
+    color: #000000;
+    background-color: #007bff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    width: 50%;
+    height: 30px;
+    margin: auto;
+
+}
+.btn-chitiet:hover{
+    background-color: #4CAF50;
+}
+
 /* Tạo kiểu cho thanh menu */
 .navbar {
     background-color: #2c3e50;
@@ -394,3 +429,6 @@ button:hover {
 }
 
 /*end css LVT*/
+
+
+/*footer*/

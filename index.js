@@ -13,6 +13,5 @@ app.use(express.static("public"));
 
 database.connect();
 
-
 router(app);
 app.listen(3000);

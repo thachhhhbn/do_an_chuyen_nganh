@@ -1,24 +1,10 @@
 extends ../layouts/index
 block content
-    // Phần Danh Sách Sinh Viên, ban đầu ẩn đi
-    #studentList.container(style='display: none;')
-        h1 Danh sach sinh vien
-        for item in listModel
-            .student-card
-                img.student-img(src='images/student1.jpg' alt='Nguyễn Văn A')
-                h3 `#{item.name}`
-                button.detail-button(onclick="showStudentDetails('SV001')") Chi tiet
-    #studentDetails.container(style='display: none; position: relative;')
-        button.back-button(onclick='hideStudentDetails()') Quay l&#x1EA1;i
-        .student-info
-            img#detailPhoto.student-detail-img(src='' alt='Ảnh sinh viên')
-            h2#detailName
-            p
-                strong M&atilde; Sinh Vi&ecirc;n:
-                span#detailId
-            p
-                strong L&#x1EDB;p:
-                span#detailClass
-            p
-                strong &Dstrok;i&#x1EC3;m Trung B&igrave;nh:
-                span#detailGPA
+    .student-card
+        each item in dssv
+            .card-model
+                h3 #{item.ten}
+                .card-body
+                    p(class="card-text") #{item.mssv}
+                    a(class="btn-chitiet" href=`/listModel/${item.id}` ) Chi tiết
+

@@ -1,0 +1,39 @@
+[{
+  "_id": {
+    "$oid": "671d052a1d5fba044803fa9c"
+  },
+  "id": "1",
+  "ten": "Bui Ngoc Thach",
+  "mssv": "2001216134",
+  "gioi-tinh": "Nam",
+  "chuyen_nganh": "Mang may tinh",
+  "ngay-sinh": "28-05-2003",
+  "vai-tro": "Nhom Truong\n",
+  "decription": "thiet ke bo cuc layout, ket noi database, lay du lieu database huong dan thanh vien nhom thuc hien cac phan nho\n"
+},
+{
+  "_id": {
+    "$oid": "671d052a1d5fba044803fa9d"
+  },
+  "id": "2",
+  "ten": "Le Van Thong",
+  "mssv": "2001210788",
+  "gioi-tinh": "Nam",
+  "chuyen_nganh": "Mang may tinh",
+  "ngay-sinh": "23-01-2003",
+  "vai-tro": "Thanh vien",
+  "decription": "thuc hien ve giao dien, tim hieu cach hoat dong, chia ipv4, tinh toan duong mang, host, subnet va ve giao dien\n"
+},
+{
+  "_id": {
+    "$oid": "671d052a1d5fba044803fa9e"
+  },
+  "id": "3",
+  "ten": "Phan Nhat Truong",
+  "mssv": "2001216265",
+  "gioi-tinh": "Nam",
+  "chuyen_nganh": "Mang may tinh",
+  "ngay-sinh": "29-06-2003",
+  "vai-tro": "Thanh vien",
+  "decription": "thuc hien ve giao dien, tim hieu cach hoat dong, chia ipv4, tinh toan duong mang, host, subnet va ve giao dien\n"
+}]
