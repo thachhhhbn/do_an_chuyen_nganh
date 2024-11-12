@@ -1,269 +1,262 @@
 .html {
-    font-family: "Roboto", sans-serif;
-    box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
 }
 
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 /* css main */
 .main {
-    display: flex;
-    flex-flow: column nowrap;
+  display: flex;
+  flex-flow: column nowrap;
 }
 
 /*end css main*/
 
 /*css header*/
 .header {
-    margin-bottom: 24px;
-    margin-top: 12px;
-    font-size: 28px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #000000;
-    padding-bottom: 12px;
-    flex: 1px;
+  margin-bottom: 24px;
+  margin-top: 12px;
+  font-size: 28px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #000000;
+  padding-bottom: 12px;
+  flex: 1px;
 }
 
 .header > .left-header a {
-    text-decoration: none;
-    background-color: #FF8000;
-    color: #ffffff;
-    border-radius: 4px;
-    display: flex;
-    width: 116px;
-    height: 52px;
-    align-items: center;
-    justify-content: center;
-    margin-left: 16px;
+  text-decoration: none;
+  background-color: #ff8000;
+  color: #ffffff;
+  border-radius: 4px;
+  display: flex;
+  width: 116px;
+  height: 52px;
+  align-items: center;
+  justify-content: center;
+  margin-left: 16px;
 }
 
 .header > .right-header a {
-    text-decoration: none;
-    margin-left: 24px;
-    color: #000000;
-    margin-right: 16px;
+  text-decoration: none;
+  margin-left: 24px;
+  color: #000000;
+  margin-right: 16px;
 }
-
 
 /* end css header*/
 
-
 /*css calculator*/
 .center {
-    margin-left: auto;
-    margin-right: auto;
-    /*min-height: 490px;*/
-    min-height: 512px;
+  margin-left: auto;
+  margin-right: auto;
+  /*min-height: 490px;*/
+  min-height: 512px;
 }
 
 /*end css calculator*/
 
-
 /*css footer*/
 
 .footer {
-    border-top: 1px solid #000000;
-    margin-top: 24px;
-    padding-top: 12px;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: start;
-    background-color: #4C1F7A;
-    color: #ffffff;
-
+  border-top: 1px solid #000000;
+  margin-top: 24px;
+  padding-top: 12px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: start;
+  background-color: #4c1f7a;
+  color: #ffffff;
 }
 
 .left-footer {
-    margin-left: 16px;
-    padding-bottom: 24px;
+  margin-left: 16px;
+  padding-bottom: 24px;
 }
 
 /*end css footer*/
 
 /*css LVT*/
 
-
 /* Container */
 .container {
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px 40px;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-    max-width: 600px;
-    width: 100%;
-    margin: 16px;
-    backdrop-filter: blur(10px);
-    transition: transform 0.3s ease;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  width: 100%;
+  margin: 16px;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease;
 }
 
 .container:hover {
-    transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
 /* Title */
 h1 {
-    text-align: center;
-    font-size: 28px;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Input Section */
 .input {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .input div {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .subnet-mask {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: left;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
 }
 
 /* Label Styling */
 label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #555;
-    display: block;
-    margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  display: block;
+  margin-bottom: 5px;
 }
 
 /* Input Field Styling */
 input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    color: #333;
-    outline: none;
-    transition: border 0.3s, box-shadow 0.3s;
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+  transition: border 0.3s, box-shadow 0.3s;
 }
 
 input[type="text"]:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+  border-color: #007bff;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
 }
 
 /*css ngang cho 2 container*/
 .content {
-    display: flex;
-    flex-flow: row nowrap;
+  display: flex;
+  flex-flow: row nowrap;
 }
 
 /* Result Section */
 .result {
-    margin-top: 20px;
-    background-color: rgba(248, 249, 250, 0.9);
-    padding: 15px;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    max-height: 400px;
-    overflow-y: auto;
+  margin-top: 20px;
+  background-color: rgba(248, 249, 250, 0.9);
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .network-block {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border: 1px solid #eee;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* CSS cho nút tính tổng đường mạng */
 #calculateNetworkButton {
-    width: 100%;
-    padding: 12px;
-    background-image: linear-gradient(45deg, #007bff, #0056b3);
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: 600;
-    color: white;
-    cursor: pointer;
-    transition: background-image 0.3s ease, transform 0.3s ease;
-    margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background-image: linear-gradient(45deg, #007bff, #0056b3);
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: background-image 0.3s ease, transform 0.3s ease;
+  margin-top: 20px;
 }
 
 /* CSS cho nút Tính toán */
 #calculateBtn {
-    display: block;
-    margin: 20px auto 0; /* Căn giữa theo chiều ngang */
-    padding: 12px;
-    background-color: #007bff;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: 600;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    text-align: center;
+  display: block;
+  margin: 20px auto 0; /* Căn giữa theo chiều ngang */
+  padding: 12px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  text-align: center;
 }
 
-
 #calculateBtn:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 /* CSS cho nút Chi tiết */
 .detail-button {
-    padding: 10px;
-    background-color: #007bff; /* Màu xanh lá cho nút chi tiết */
-    border: none;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 600;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    margin-top: 10px;
+  padding: 10px;
+  background-color: #007bff; /* Màu xanh lá cho nút chi tiết */
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 10px;
 }
 
 .detail-button:hover {
-    background-color: #007bff; /* Màu đậm hơn khi hover */
+  background-color: #007bff; /* Màu đậm hơn khi hover */
 }
 
 /* CSS cho nút quay lại */
 #backButton {
-    padding: 8px;
-    background-color: #ff6347;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    margin-top: 10px;
+  padding: 8px;
+  background-color: #ff6347;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 10px;
 }
 
-
 button:hover {
-    background-image: linear-gradient(45deg, #b34800, #7f4800);
-    transform: translateY(-3px);
+  background-image: linear-gradient(45deg, #b34800, #7f4800);
+  transform: translateY(-3px);
 }
 
 /* Adjust the main container to not overlap with the fixed navbar */
 .container {
-    margin-top: 21px; /* Để khoảng trống phía trên để tránh trùng với navbar */
+  margin-top: 21px; /* Để khoảng trống phía trên để tránh trùng với navbar */
 }
 
 /* Thẻ sinh viên */
@@ -272,163 +265,171 @@ button:hover {
 /* Đảm bảo container rộng toàn bộ và các thẻ sinh viên xếp theo hàng ngang */
 /* Căn chỉnh phần Danh Sách Sinh Viên */
 
-
 /* Chi tiết sinh viên */
 .student-details {
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
 }
 
 /* Đặt nút "Quay lại" ở góc trái trên và thu nhỏ */
 .back-button {
-
-    top: 10px;
-    left: 10px;
-    padding: 6px 12px;
-    font-size: 14px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  top: 10px;
+  left: 10px;
+  padding: 6px 12px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 /* Căn giữa ảnh và thông tin sinh viên */
 .student-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Căn giữa theo chiều ngang */
-    justify-content: center; /* Căn giữa theo chiều dọc */
-    text-align: center;
-    padding-top: 30px; /* Để có khoảng cách giữa nút và nội dung */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Căn giữa theo chiều ngang */
+  justify-content: center; /* Căn giữa theo chiều dọc */
+  text-align: center;
+  padding-top: 30px; /* Để có khoảng cách giữa nút và nội dung */
 }
 
 /* Định dạng ảnh chi tiết sinh viên */
 .student-detail-img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-    object-fit: cover;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 
 /* Thẻ sinh viên */
 .student-card {
-    display: flex;
-    flex-flow: row nowrap;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    text-align: center;
-    margin: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    vertical-align: top;
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  margin: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  vertical-align: top;
 }
 
 .student-img {
-    width: 150px; /* Chiều rộng cố định cho ảnh */
-    height: 150px; /* Chiều cao cố định cho ảnh */
-    border-radius: 50%; /* Làm ảnh thành hình tròn */
-    object-fit: cover; /* Giúp ảnh tự động căn chỉnh để lấp đầy khung hình tròn */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px; /* Khoảng cách phía dưới ảnh */
+  width: 150px; /* Chiều rộng cố định cho ảnh */
+  height: 150px; /* Chiều cao cố định cho ảnh */
+  border-radius: 50%; /* Làm ảnh thành hình tròn */
+  object-fit: cover; /* Giúp ảnh tự động căn chỉnh để lấp đầy khung hình tròn */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px; /* Khoảng cách phía dưới ảnh */
 }
 
 .student-card h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
 .student-card button {
-    /*padding: 10px 20px;*/
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  /*padding: 10px 20px;*/
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .student-card button:hover {
-    background-color: #45a049;
+  background-color: #45a049;
 }
 
 /* Phần thông tin chi tiết sinh viên */
 .student-details {
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .card-model {
-    padding: 4px 12px 0;
-    margin: 0 24px 0;
+  padding: 4px 12px 0;
+  margin: 0 24px 0;
 }
 
 .btn-chitiet {
-    text-decoration: none;
-    color: #000000;
-    background-color: #007bff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
-    width: 50%;
-    height: 30px;
-    margin: auto;
-
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #007bff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  width: 50%;
+  height: 30px;
+  margin: auto;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
-.btn-chitiet:hover{
-    background-color: #4CAF50;
+.btn-chitiet:hover {
+  background-color: #4caf50;
+}
+.card-text {
+    margin: 8px;
 }
 
 /* Tạo kiểu cho thanh menu */
 .navbar {
-    background-color: #2c3e50;
-    padding: 10px 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: #2c3e50;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .navbar ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
 }
 
 .navbar ul li {
-    margin: 0 15px;
+  margin: 0 15px;
 }
 
 .navbar ul li a {
-    color: #ecf0f1;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 16px;
-    padding: 8px 15px;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
+  color: #ecf0f1;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 8px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 /* Hiệu ứng khi di chuột vào các mục menu */
 .navbar ul li a:hover {
-    background-color: #3498db;
-    color: #ffffff;
+  background-color: #3498db;
+  color: #ffffff;
 }
 
 /* Tạo hiệu ứng cho mục menu đang được chọn */
 .navbar ul li a.active {
-    background-color: #2980b9;
-    color: #ffffff;
+  background-color: #2980b9;
+  color: #ffffff;
 }
 
 /*end css LVT*/
-
+/* css detail model */
+.btn-secondary {
+  text-decoration: none;
+  cursor: pointer;
+  background-color: #555;
+  padding: 4px;
+  color: #ffffff;
+}
+/* end css detail model */
 
 /*footer*/

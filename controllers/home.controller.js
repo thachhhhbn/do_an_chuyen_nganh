@@ -4,21 +4,19 @@ module.exports.index = (req, res) => {
 }
 
 module.exports.listModel = async (req, res) => {
-    const dssv = await model.find();
+    const listModel = await model.find();
     res.render("./../views/client/pages/listModel.pug",
-        {dssv}
+        {listModel}
     );
 }
 
 module.exports.detailModel = async (req, res) => {
     const id = req.params.id;
-    const idModel = await model.findOne().where('id').equals(id);
+    const item = await model.findOne({id});
 
-    res.render("./../views/client/pages/detailModel.pug", {idModel});
-    console.log(idModel);
+    res.render("./../views/client/pages/detailModel.pug", {item});
+    console.log(item);
 }
 
-module.exports.detail = (req, res) => {
-    res.render("./../views/client/pages/detail.pug");
-}
+
 

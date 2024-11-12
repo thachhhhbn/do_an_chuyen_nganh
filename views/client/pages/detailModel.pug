@@ -1,14 +1,14 @@
-extends ../layouts/index
+extends ../layouts/index.pug
 block content
-    .detail-container
-        h2 Thông Tin Chi Tiết Sinh Viên
-        if idModel
-            p Tên: #{idModel.ten}
-            p MSSV: #{idModel.mssv}
-            p Gioi tinh: #{idModel.gioitinh}
-            p Chuyen Nganh: #{idModel.chuyen_nganh}
-            p Ngay Sinh: #{idModel.ngaysinh}
-            p Vai Tro: #{idModel.vaitro}
-            p Cong Viec Da lam: #{idModel.description}
-    a(href="/listModel") Quay lại danh sách
+    .detail-container.container
+        h1 Thông Tin Chi Tiết Sinh Viên
+        if item
+            p Tên: #{item.ten}
+            p MSSV: #{item.mssv}
+            p Gioi tinh: #{item.gioitinh}
+            p Chuyen Nganh: #{item.chuyen_nganh}
+            p Ngay Sinh: #{item.ngaysinh}
+            p Vai Tro: #{item.vaitro}
+            p Cong Viec Da lam: #{item.description}
+    a(id="calculateNetworkButton"  href="/listModel") Quay lại danh sách
 
