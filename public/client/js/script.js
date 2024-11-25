@@ -137,6 +137,7 @@ function binaryToIp(binary) {
         .map((bin) => parseInt(bin, 2))
         .join(".");
 }
+
 // Hàm hiển thị Subnet Calculator
 // Hàm hiển thị Subnet Calculator và ẩn các phần khác
 function showCalculator() {
@@ -146,58 +147,8 @@ function showCalculator() {
     document.getElementById("studentDetails").style.display = "none";
 }
 
-// Hàm hiển thị Danh Sách Sinh Viên và ẩn các phần khác
-function showStudentList() {
-    document.getElementById("calculator").style.display = "none";
-    document.getElementById("resultContainer").style.display = "none";
-    document.getElementById("studentList").style.display = "block";
-    document.getElementById("studentDetails").style.display = "none";
-}
-
-// Hàm hiển thị chi tiết sinh viên và ẩn Danh Sách Sinh Viên
-function showStudentDetails(studentId) {
-    const students = {
-        SV001: {
-            name: "Nguyễn Văn A",
-            id: "SV001",
-            class: "10A1",
-            gpa: "8.5",
-            photo: "images/student1.jpg"
-        },
-        SV002: {
-            name: "Trần Thị B",
-            id: "SV002",
-            class: "10A2",
-            gpa: "7.0",
-            photo: "images/student2.jpg"
-        },
-        SV003: {
-            name: "Lê Văn C",
-            id: "SV003",
-            class: "10A1",
-            gpa: "9.0",
-            photo: "images/student3.jpg"
-        }
-    };
 
 
 
-    const student = students[studentId];
-    document.getElementById("detailName").innerText = student.name;
-    document.getElementById("detailId").innerText = student.id;
-    document.getElementById("detailClass").innerText = student.class;
-    document.getElementById("detailGPA").innerText = student.gpa;
-    document.getElementById("detailPhoto").src = student.photo; // Hiển thị ảnh sinh viên
-
-    // Hiển thị phần chi tiết và ẩn danh sách sinh viên
-    document.getElementById("studentList").style.display = "none";
-    document.getElementById("studentDetails").style.display = "block";
-}
-
-// Hàm quay lại Danh Sách Sinh Viên từ phần chi tiết sinh viên
-function hideStudentDetails() {
-    document.getElementById("studentDetails").style.display = "none";
-    document.getElementById("studentList").style.display = "block";
-}
 
 //end script lvt

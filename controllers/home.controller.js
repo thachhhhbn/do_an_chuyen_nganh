@@ -18,5 +18,7 @@ module.exports.detailModel = async (req, res) => {
     console.log(item);
 }
 
-
+module.exports.explainTool=(req, res)=>{
+    res.render("./../views/client/pages/explainTool.pug");
+}
 
