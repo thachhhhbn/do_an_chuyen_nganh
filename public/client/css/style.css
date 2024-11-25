@@ -433,3 +433,43 @@ button:hover {
 /* end css detail model */
 
 /*footer*/
+
+/* css file explainTool */
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  background: #fff; /* Nền trắng */
+  padding: 20px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng */
+}
+
+/* Tiêu đề chính */
+.main-title {
+  font-size: 2.5em;
+  color: #2a4d69; /* Màu xanh Harvard */
+  text-align: center;
+  margin-bottom: 20px;
+  border-bottom: 3px solid #4b86b4; /* Kẻ dưới tiêu đề */
+  padding-bottom: 10px;
+}
+
+/* Các bước */
+.steps {
+  margin-top: 20px;
+}
+
+.step-title {
+  font-size: 1.5em;
+  color: #4b86b4; /* Xanh nhạt */
+  margin-top: 20px;
+  border-left: 5px solid #2a4d69; /* Kẻ viền trái */
+  padding-left: 10px;
+}
+
+.step-content {
+  font-size: 1em;
+  margin: 10px 0;
+  color: #555;
+}
+/* end css file explainTool */

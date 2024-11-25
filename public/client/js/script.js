@@ -89,46 +89,6 @@ function calculateSubnets() {
     }
 }
 
-function calculateTotalSubnets() {
-    const subnetInput = document.querySelector('input[name="subnet-mask"]').value;
-    const ipInput = document.querySelector('input[name="ip"]').value;
-
-    if (!validateIp(ipInput) || isNaN(parseInt(subnetInput)) || parseInt(subnetInput) < 0 || parseInt(subnetInput) > 32) {
-        alert("Vui lòng nhập địa chỉ IP và Subnet Mask hợp lệ (0-32)");
-        return;
-    }
-
-    const subnetMaskBits = parseInt(subnetInput);
-    const totalSubnets = Math.pow(2, 32 - subnetMaskBits);
-    const numberOfHosts = Math.pow(2, 32 - subnetMaskBits) - 2;
-
-    const binaryIp = ipToBinary(ipInput).replace(/\./g, "");
-    const networkBinary = binaryIp.substr(0, subnetMaskBits).padEnd(32, "0");
-    const networkAddress = binaryToIp(networkBinary);
-    const broadcastBinary = binaryIp.substr(0, subnetMaskBits).padEnd(32, "1");
-    const broadcastAddress = binaryToIp(broadcastBinary);
-
-    const resultDiv = document.querySelector(".result");
-    resultDiv.innerHTML = `
-    Tổng số đường mạng có thể: ${totalSubnets} <br/>
-    Số host khả dụng trên mỗi mạng: ${numberOfHosts} <br/>
-    Địa chỉ mạng mẫu (subnet đầu tiên): ${networkAddress} <br/>
-    Địa chỉ broadcast mẫu (subnet đầu tiên): ${broadcastAddress}
-  `;
-
-    // Hiển thị kết quả
-    document.getElementById("resultContainer").style.display = "block";
-
-    let calculateBtn = document.getElementById("calculateBtn");
-    if (!calculateBtn) {
-        calculateBtn = document.createElement("button");
-        calculateBtn.id = "calculateBtn";
-        calculateBtn.innerText = "Tính toán";
-        calculateBtn.onclick = calculateSubnets;
-        calculateBtn.style.marginTop = "20px";
-    }
-    resultDiv.appendChild(calculateBtn);
-}
 
 
 function binaryToIp(binary) {
@@ -137,18 +97,3 @@ function binaryToIp(binary) {
         .map((bin) => parseInt(bin, 2))
         .join(".");
 }
-
-// Hàm hiển thị Subnet Calculator
-// Hàm hiển thị Subnet Calculator và ẩn các phần khác
-function showCalculator() {
-    document.getElementById("calculator").style.display = "block";
-    document.getElementById("resultContainer").style.display = "block";
-    document.getElementById("studentList").style.display = "none";
-    document.getElementById("studentDetails").style.display = "none";
-}
-
-
-
-
-
-//end script lvt

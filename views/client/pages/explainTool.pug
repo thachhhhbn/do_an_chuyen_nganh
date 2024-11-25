@@ -1,3 +1,17 @@
 extends ../layouts/index
 block content
-    p this is
+    .container
+        h1.main-title CAC BUOC THUC HIEN TRONG SUBNETTING
+        .steps
+            h2.step-title Bước 1: Xác định lớp mạng từ địa chỉ IP
+            p.step-content Mạng được xác định dựa vào giá trị octet đầu tiên của địa chỉ IP.
+
+            h2.step-title Bước 2: Xác định giá trị m và n
+            p.step-content 
+                |  ( n ): Số bit mượn từ phần host để tạo thêm subnet.
+                br
+                |  ( m ): Số bit còn lại để sử dụng cho địa chỉ host. Số host khả dụng trong mỗi subnet phụ thuộc vào giá trị này.
+
+            h2.step-title Bước 3: Tính số subnet và số host
+            p.step-content Số subnet được tính bằng công thức( 2^n). Số host trên mỗi subnet là( 2^m-2).
+
