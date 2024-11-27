@@ -7,7 +7,7 @@ block content
                 // Nội dung nhập liệu và nút tính toán cho Subnet Calculator
                 .input
                     div
-                        label(for='ip') &Dstrok;&#x1ECB;a ch&#x1EC9; IP
+                        label(for='ip') Dia Chi IP
                         input(type='text' name='ip' placeholder='Vui lòng nhập địa chỉ IP' oninput='updateBinaryIp()')
                         input.ip-binary(type='text' name='ip-binary' placeholder='Binary IP' style='margin-top: 10px' disabled='')
                     div
@@ -17,7 +17,7 @@ block content
                         input.subnet-mask-number(style='margin-bottom: 10px' type='text' placeholder='Địa chỉ subnet mask' disabled='')
                         input.subnet-mask-binary(type='text' name='subnet-mask-binary' placeholder='Binary Subnet Mask' disabled='')
             // Nút tính tổng đường mạng
-            button#calculateNetworkButton(onclick='calculateTotalSubnets()') T&iacute;nh t&#x1ED5;ng s&#x1ED1; &dstrok;&#x1B0;&#x1EDD;ng m&#x1EA1;ng
-        #resultContainer.container(style='display: none;')
-            .result(style='height: 380px; padding: 20px; margin: 12px')
-            button#calculateButton(onclick='calculateSubnets()' style='display: none; margin-top: 20px;') T&iacute;nh to&aacute;n
+            button#calculateNetworkButton T&iacute;nh t&#x1ED5;ng s&#x1ED1; &dstrok;&#x1B0;&#x1EDD;ng m&#x1EA1;ng
+    .ketqua 
+        .content.result-container.result(style="display:none")
+        .result.detail_ip(style="display:none; max-height: 270px; margin-top:12px")

@@ -58,6 +58,10 @@
   margin-right: auto;
   /*min-height: 490px;*/
   min-height: 512px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: start;
 }
 
 /*end css calculator*/
@@ -435,14 +439,6 @@ button:hover {
 /*footer*/
 
 /* css file explainTool */
-.container {
-  max-width: 800px;
-  margin: 40px auto;
-  background: #fff; /* Nền trắng */
-  padding: 20px 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng */
-}
 
 /* Tiêu đề chính */
 .main-title {
