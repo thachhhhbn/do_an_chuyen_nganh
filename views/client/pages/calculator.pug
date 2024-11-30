@@ -1,23 +1,21 @@
 extends ../layouts/index
+
 block content
     .content
         #calculator.container.cal
             h1 Subnet Calculator
             .content
-                // Nội dung nhập liệu và nút tính toán cho Subnet Calculator
                 .input
                     div
-                        label(for='ip') Dia Chi IP
-                        input(type='text' name='ip' placeholder='Vui lòng nhập địa chỉ IP' oninput='updateBinaryIp()')
-                        input.ip-binary(type='text' name='ip-binary' placeholder='Binary IP' style='margin-top: 10px' disabled='')
+                        label(for='ip') Địa chỉ IP:
+                        input(type='text' name='ip' placeholder='Vui lòng nhập địa chỉ IP')
                     div
                         .subnet-mask
-                            label(for='subnet-mask') Subnet mask /
-                            input(style='max-width: 100px; margin-left: 20px' type='text' name='subnet-mask' placeholder='24' oninput='updateBinaryIp()')
-                        input.subnet-mask-number(style='margin-bottom: 10px' type='text' placeholder='Địa chỉ subnet mask' disabled='')
-                        input.subnet-mask-binary(type='text' name='subnet-mask-binary' placeholder='Binary Subnet Mask' disabled='')
-            // Nút tính tổng đường mạng
-            button#calculateNetworkButton T&iacute;nh t&#x1ED5;ng s&#x1ED1; &dstrok;&#x1B0;&#x1EDD;ng m&#x1EA1;ng
-    .ketqua 
-        .content.result-container.result(style="display:none")
+                            label(for='subnet-mask') Subnet Mask /
+                            input(style='max-width: 100px; margin-left: 20px' type='text' name='subnet-mask' placeholder='CIDR (VD: 29)')
+            button#calculateNetworkButton Tính tổng đường mạng
+    div 
+        .content(style="display:flex;flex-flow: column nowrap;align-items:start")
+            .result-container.result(style="display:none")
+            button(class="btn_chitiet" style="display:none") Chi tiết
         .result.detail_ip(style="display:none; max-height: 270px; margin-top:12px")

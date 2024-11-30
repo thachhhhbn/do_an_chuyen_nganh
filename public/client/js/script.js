@@ -1,172 +1,160 @@
-//script lvt
 function ipToBinary(ip) {
-    const octets = ip.split(".");
-    const binaryOctets = octets.map((octet) => {
-        if (
-            octet === ""
-            || isNaN(octet)
-            || parseInt(octet) > 255
-            || parseInt(octet) < 0
-        ) {
-            return "";
-        }
-        return parseInt(octet, 10).toString(2).padStart(8, "0");
-    });
-    return binaryOctets.join(".");
-}
-
-function cidrToSubnetMask(cidr) {
-    const mask = [];
-    for (let i = 0; i < 4; i++) {
-        const bits = Math.min(cidr, 8);
-        mask.push(256 - Math.pow(2, 8 - bits));
-        cidr -= bits;
-    }
-    return mask.join(".");
-}
-
-function cidrToBinary(cidr) {
-    let binaryMask = "".padStart(cidr, "1").padEnd(32, "0");
-    return binaryMask.match(/.{1,8}/g).join(".");
-}
-
-function updateBinaryIp() {
-    const ipInput = document
-        .querySelector('input[name="ip"]')
-        .value;
-    const subnetInput = document
-        .querySelector('input[name="subnet-mask"]')
-        .value;
-
-    const ipBinaryOutput = document
-        .querySelector(".ip-binary");
-    const subnetBinaryOutput = document
-        .querySelector(".subnet-mask-binary");
-    const subnetNumberOutput = document
-        .querySelector(".subnet-mask-number");
-
-    ipBinaryOutput.value = ipToBinary(ipInput);
-
-    if (subnetInput && !isNaN(parseInt(subnetInput))) {
-        const cidr = parseInt(subnetInput);
-        subnetBinaryOutput.value = cidrToBinary(cidr);
-        subnetNumberOutput.value = cidrToSubnetMask(cidr);
-    } else {
-        subnetBinaryOutput.value = "";
-        subnetNumberOutput.value = "";
-    }
-}
-
-function validateIp(ip) {
-    const octets = ip.split(".");
-    if (octets.length !== 4) return false;
-
-    return octets.every((octet) => {
-        const num = parseInt(octet, 10);
-        return !isNaN(num) && num >= 0 && num <= 255;
-    });
+  return ip
+    .split(".")
+    .map((octet) => parseInt(octet, 10).toString(2).padStart(8, "0"))
+    .join(".");
 }
 
 function binaryToIp(binary) {
-    return binary
-        .match(/.{1,8}/g)
-        .map((bin) => parseInt(bin, 2))
-        .join(".");
+  return binary
+    .match(/.{1,8}/g)
+    .map((bin) => parseInt(bin, 2))
+    .join(".");
 }
 
+function cidrToSubnetMask(cidr) {
+  const maskBinary = "".padStart(cidr, "1").padEnd(32, "0");
+  return maskBinary
+    .match(/.{1,8}/g)
+    .map((bin) => parseInt(bin, 2))
+    .join(".");
+}
 
-const btn_tinh_tong_so_duong_mang = document
-    .querySelector("#calculateNetworkButton");
+function calculateSubnet(ip, cidr) {
+  if (!validateIp(ip)) {
+    throw new Error("Địa chỉ IP không hợp lệ.");
+  }
+  if (isNaN(cidr) || cidr < 0 || cidr > 32) {
+    throw new Error("CIDR không hợp lệ.");
+  }
 
-var so_duong_subnet_mask = 0;
-var so_host_tren_moi_subnet_mask = 0;
-var so_bit_muon = 0;
-var so_bit_host_con_lai = 0;
-var octets;
-btn_tinh_tong_so_duong_mang
-    .addEventListener("click", () => {
-        let subnetInput = document
-            .querySelector('input[name="subnet-mask"]').value;
-        let ipInput = document
-            .querySelector('input[name="ip"]').value;
+  const binaryIp = ipToBinary(ip).replace(/\./g, "");
+  const networkBinary = binaryIp.slice(0, cidr).padEnd(32, "0");
+  const broadcastBinary = binaryIp.slice(0, cidr).padEnd(32, "1");
 
-        if (
-            !validateIp(ipInput)
-            || isNaN(parseInt(subnetInput))
-            || parseInt(subnetInput) < 0
-            || parseInt(subnetInput) > 32
-        ) {
-            alert("Vui lòng nhập địa chỉ IP và Subnet Mask hợp lệ (0-32)");
-            return;
-        }
-        octets = ipInput.split(".");
-        let octet1 = parseInt(octets[0]);
+  const subnetMask = cidrToSubnetMask(cidr);
+  const networkAddress = binaryToIp(networkBinary);
+  const broadcastAddress = binaryToIp(broadcastBinary);
 
-        if (octet1 <= 126) {
-            so_bit_muon = subnetInput - 8;
-        } else if (octet1 > 127 && octet1 < 192) {
-            so_bit_muon = subnetInput - 16;
-        } else {
-            so_bit_muon = subnetInput - 24;
-        }
-        so_bit_host =
-            32 - subnetInput;
-        so_subnet = Math
-            .pow(2, so_bit_muon);
-        so_host_tren_moi_subnet_mask = Math
-            .pow(2, so_bit_host) - 2;
+  const totalAddresses = Math.pow(2, 32 - cidr);
+  const usableAddresses = totalAddresses > 2 ? totalAddresses - 2 : 0;
 
+  // Tạo usableRange
+  const usableRange = [];
+  if (usableAddresses > 0) {
+    const firstHostBinary = (parseInt(networkBinary, 2) + 1)
+      .toString(2)
+      .padStart(32, "0");
+    const lastHostBinary = (parseInt(broadcastBinary, 2) - 1)
+      .toString(2)
+      .padStart(32, "0");
 
-        const resultContainer = document
-            .querySelector(".result-container");
-        resultContainer.style.display = "block";
-        resultContainer.innerHTML = "";
-        const title = document
-            .createElement("h1");
-        title.textContent = "Kết quả tính toán";
+    let currentHostBinary = firstHostBinary;
+    while (
+      parseInt(currentHostBinary, 2) <= parseInt(lastHostBinary, 2) &&
+      usableRange.length < usableAddresses
+    ) {
+      usableRange.push(binaryToIp(currentHostBinary));
+      currentHostBinary = (
+        parseInt(currentHostBinary, 2) + 1
+      )
+        .toString(2)
+        .padStart(32, "0");
+    }
+  }
 
-        const bitHostConLai = document
-            .createElement("p");
-        bitHostConLai.textContent = `Số bit host còn lại: 
-        ${so_bit_host}`;
+  return {
+    subnetMask,
+    networkAddress,
+    broadcastAddress,
+    totalAddresses,
+    usableAddresses,
+    usableRange,
+  };
+}
 
-        const subnetInfo = document
-            .createElement("p");
-        subnetInfo.textContent =
-            `Số subnet: ${so_subnet}
-            , Số host trên mỗi subnet: ${so_host_tren_moi_subnet_mask}`;
-        const detailButton = document.createElement("button");
-        detailButton.textContent = "Chi tiết";
-        detailButton.style.marginTop = "10px";
-        detailButton.addEventListener("click", () => {
-            const element_chi_tiet = document
-                .querySelector(".detail_ip");
-            element_chi_tiet.style.display = "block";
-            element_chi_tiet.innerHTML = "";
-            element_chi_tiet.style.float = "left";
-            const ips = ipInput.split(".");
-            parseInt(ips[3]);
-            ips[3] = 0;
-            for (let i = 0; i < so_subnet; i++) {
-                const network_class = document
-                    .createElement("p");
-                ips[3] += parseInt(so_bit_host);
-                network_class.textContent = octets.join(".");
-                console.log(network_class);
-                element_chi_tiet.appendChild(network_class);
-            }
-        });
-        resultContainer.appendChild(title);
-        resultContainer.appendChild(bitHostConLai);
-        resultContainer.appendChild(subnetInfo);
-        resultContainer.appendChild(detailButton);
+// Event listeners
+const btnCalculate = document.querySelector("#calculateNetworkButton");
+const btnDetail = document.querySelector(".btn_chitiet");
+
+btnCalculate.addEventListener("click", () => {
+  const ip = document.querySelector('input[name="ip"]').value;
+  const subnetMask = parseInt(
+    document.querySelector('input[name="subnet-mask"]').value
+  );
+
+  if (
+    !validateIp(ip) ||
+    isNaN(subnetMask) ||
+    subnetMask < 0 ||
+    subnetMask > 32
+  ) {
+    alert("Vui lòng nhập địa chỉ IP và Subnet Mask hợp lệ (0-32)");
+    return;
+  }
+
+  try {
+    const result = calculateSubnet(ip, subnetMask);
+
+    // Hiển thị bảng kết quả
+    const resultContainer = document.querySelector(".result-container");
+    resultContainer.innerHTML = `
+            <table border="1" style="border-collapse: collapse; width: 100%; text-align: left;">
+                <tr>
+                    <th>Subnet Mask</th>
+                    <th>Network Address</th>
+                    <th>Broadcast Address</th>
+                    <th>Total Addresses</th>
+                    <th>Usable Addresses</th>
+                </tr>
+                <tr>
+                    <td>${result.subnetMask}</td>
+                    <td>${result.networkAddress}</td>
+                    <td>${result.broadcastAddress}</td>
+                    <td>${result.totalAddresses}</td>
+                    <td>${result.usableAddresses}</td>
+                </tr>
+            </table>
+        `;
+    resultContainer.style.display = "block";
+
+    btnDetail.dataset.usableRange = JSON.stringify(result.usableRange); // Cập nhật dữ liệu usableRange
+    btnDetail.style.display = "block"; // Hiển thị nút
+  } catch (error) {
+    console.error("Lỗi:", error.message);
+    alert("Đã xảy ra lỗi khi tính toán. Vui lòng kiểm tra lại dữ liệu đầu vào.");
+  }
+});
+
+btnDetail.addEventListener("click", () => {
+  try {
+    const usableRange = JSON.parse(btnDetail.dataset.usableRange || "[]");
+    const detailContainer = document.querySelector(".detail_ip");
+
+    if (usableRange.length === 0) {
+      detailContainer.innerHTML = `<p>Không có địa chỉ sử dụng được.</p>`;
+    } else {
+      detailContainer.innerHTML = `<p>Danh sách địa chỉ sử dụng được:</p><ul>`;
+      usableRange.forEach((address, index) => {
+        detailContainer.innerHTML += `<li>${index + 1}. ${address}</li>`;
+      });
+      detailContainer.innerHTML += `</ul>`;
+    }
+    detailContainer.style.display = "block";
+  } catch (error) {
+    console.error("Lỗi:", error.message);
+    alert("Đã xảy ra lỗi khi hiển thị danh sách chi tiết.");
+  }
+});
+
+// Hàm kiểm tra địa chỉ IP
+function validateIp(ip) {
+  const octets = ip.split(".");
+  return (
+    octets.length === 4 &&
+    octets.every((octet) => {
+      const num = parseInt(octet, 10);
+      return !isNaN(num) && num >= 0 && num <= 255;
     })
-
-// function btn_chi_tiet() {
-//
-// }
-
-
-
-
-
+  );
+}
