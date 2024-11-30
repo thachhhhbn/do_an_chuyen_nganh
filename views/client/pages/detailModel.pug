@@ -1,7 +1,9 @@
 extends ../layouts/index.pug
 block content
     .detail-container.container
-        h1 Thông Tin Chi Tiết Sinh Viên
+        div(class="title_btn_back") 
+            h1 Thông Tin Chi Tiết Sinh Viên
+            a(id="btn_back"  href="/listModel") Quay lại
         if item
             p Tên: #{item.ten}
             p MSSV: #{item.mssv}
@@ -10,5 +12,4 @@ block content
             p Ngay Sinh: #{item.ngaysinh}
             p Vai Tro: #{item.vaitro}
             p Cong Viec Da lam: #{item.description}
-    a(id="calculateNetworkButton"  href="/listModel") Quay lại danh sách
 

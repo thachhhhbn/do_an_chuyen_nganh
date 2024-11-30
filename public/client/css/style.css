@@ -163,7 +163,11 @@ input[type="text"]:focus {
 /*css ngang cho 2 container*/
 .content {
   display: flex;
-  flex-flow: row nowrap;
+  flex-direction: column; /* Thay vì row để sắp xếp theo chiều dọc */
+  align-items: center; /* Căn giữa theo chiều ngang */
+  justify-content: flex-start; /* Căn nội dung từ trên xuống */
+  gap: 20px; /* Tạo khoảng cách giữa các phần tử */
+  padding: 20px; /* Khoảng cách bên trong */
 }
 
 /* Result Section */
@@ -380,7 +384,7 @@ button:hover {
   background-color: #4caf50;
 }
 .card-text {
-    margin: 8px;
+  margin: 8px;
 }
 
 /* Tạo kiểu cho thanh menu */
@@ -469,3 +473,59 @@ button:hover {
   color: #555;
 }
 /* end css file explainTool */
+.ip_binary {
+  margin-top: 4px;
+}
+.subnet_binary {
+  margin: 4px;
+}
+.btn_chitiet {
+  padding: 12px;
+  background-image: linear-gradient(45deg, #007bff, #0056b3);
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: background-image 0.3s ease, transform 0.3s ease;
+  margin-top: 20px;
+}
+.title_btn_back {
+  display: flex;
+  justify-content: space-between; /* Chia khoảng cách giữa tiêu đề và nút */
+  align-items: center;
+  width: 100%; /* Đảm bảo chiều rộng chiếm toàn bộ */
+  max-width: 800px; /* Giới hạn chiều rộng */
+  margin: 0 auto; /* Căn giữa trong màn hình */
+  padding: 10px 20px; /* Khoảng cách trong */
+  border-bottom: 2px solid #007bff; /* Đường viền dưới */
+}
+
+/* Kiểu cho tiêu đề */
+.title_btn_back h1 {
+  font-size: 24px; /* Kích thước chữ */
+  font-weight: bold; /* Chữ đậm */
+  color: #333; /* Màu chữ */
+  margin: 0; /* Loại bỏ khoảng cách mặc định */
+}
+
+/* Nút bấm quay lại */
+#btn_back {
+  text-decoration: none;
+  background-color: #007bff; /* Màu nền */
+  color: white; /* Màu chữ */
+  border-radius: 5px; /* Bo góc */
+  font-size: 18px; /* Kích thước chữ */
+  font-weight: bold; /* Chữ đậm */
+  padding: 10px 20px; /* Khoảng cách bên trong */
+  text-align: center;
+  transition: all 0.3s ease; /* Hiệu ứng chuyển mượt */
+}
+
+.btn_back:hover {
+  background-color: #0056b3; /* Màu nền khi hover */
+  transform: scale(1.05); /* Hiệu ứng phóng to nhẹ */
+}
+
+
