@@ -6,7 +6,6 @@ require("dotenv").config();
 const database
     = require("./config/database");
 const router = require("./routes/index.router");
-const port = process.env.PORT || 3000;
 
 app.set("views", "views");
 app.set("view engine", "pug");
