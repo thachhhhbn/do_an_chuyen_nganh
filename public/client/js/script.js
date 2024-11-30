@@ -1,3 +1,4 @@
+// Hàm chuyển đổi IP sang nhị phân
 function ipToBinary(ip) {
   return ip
     .split(".")
@@ -5,6 +6,50 @@ function ipToBinary(ip) {
     .join(".");
 }
 
+// Hàm chuyển đổi CIDR sang subnet mask nhị phân
+function cidrToSubnetMaskBinary(cidr) {
+  return "".padStart(cidr, "1").padEnd(32, "0").match(/.{1,8}/g).join(".");
+}
+
+// Hàm kiểm tra IP hợp lệ
+function validateIp(ip) {
+  const octets = ip.split(".");
+  return (
+    octets.length === 4 &&
+    octets.every((octet) => {
+      const num = parseInt(octet, 10);
+      return !isNaN(num) && num >= 0 && num <= 255;
+    })
+  );
+}
+
+// Sự kiện hiển thị mã nhị phân của IP
+document.querySelector('input[name="ip"]').addEventListener("input", (event) => {
+  const ip = event.target.value;
+  const ipBinaryInput = document.querySelector(".ip_binary");
+
+  if (validateIp(ip)) {
+    ipBinaryInput.value = ipToBinary(ip);
+  } else {
+    ipBinaryInput.value = "IP không hợp lệ";
+  }
+});
+
+// Sự kiện hiển thị mã nhị phân của subnet mask
+document
+  .querySelector('input[name="subnet-mask"]')
+  .addEventListener("input", (event) => {
+    const cidr = parseInt(event.target.value, 10);
+    const subnetBinaryInput = document.querySelector(".subnet_binary");
+
+    if (!isNaN(cidr) && cidr >= 0 && cidr <= 32) {
+      subnetBinaryInput.value = cidrToSubnetMaskBinary(cidr);
+    } else {
+      subnetBinaryInput.value = "CIDR không hợp lệ";
+    }
+  });
+
+// Hàm chuyển đổi từ nhị phân sang IP
 function binaryToIp(binary) {
   return binary
     .match(/.{1,8}/g)
@@ -12,6 +57,7 @@ function binaryToIp(binary) {
     .join(".");
 }
 
+// Hàm chuyển đổi CIDR sang Subnet Mask
 function cidrToSubnetMask(cidr) {
   const maskBinary = "".padStart(cidr, "1").padEnd(32, "0");
   return maskBinary
@@ -20,6 +66,7 @@ function cidrToSubnetMask(cidr) {
     .join(".");
 }
 
+// Hàm tính toán thông tin subnet
 function calculateSubnet(ip, cidr) {
   if (!validateIp(ip)) {
     throw new Error("Địa chỉ IP không hợp lệ.");
@@ -73,7 +120,7 @@ function calculateSubnet(ip, cidr) {
   };
 }
 
-// Event listeners
+// Sự kiện tính toán mạng và hiển thị kết quả
 const btnCalculate = document.querySelector("#calculateNetworkButton");
 const btnDetail = document.querySelector(".btn_chitiet");
 
@@ -146,15 +193,3 @@ btnDetail.addEventListener("click", () => {
     alert("Đã xảy ra lỗi khi hiển thị danh sách chi tiết.");
   }
 });
-
-// Hàm kiểm tra địa chỉ IP
-function validateIp(ip) {
-  const octets = ip.split(".");
-  return (
-    octets.length === 4 &&
-    octets.every((octet) => {
-      const num = parseInt(octet, 10);
-      return !isNaN(num) && num >= 0 && num <= 255;
-    })
-  );
-}

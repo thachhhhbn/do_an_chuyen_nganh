@@ -9,10 +9,12 @@ block content
                     div
                         label(for='ip') Địa chỉ IP:
                         input(type='text' name='ip' placeholder='Vui lòng nhập địa chỉ IP')
+                        input(disabled type="text" class="ip_binary" placeholder="Mã nhị phân của IP")
                     div
                         .subnet-mask
-                            label(for='subnet-mask') Subnet Mask /
+                            label(for='subnet-mask') Subnet Mask / CIDR:
                             input(style='max-width: 100px; margin-left: 20px' type='text' name='subnet-mask' placeholder='CIDR (VD: 29)')
+                            input(disabled type='text' class="subnet_binary" placeholder="Mã nhị phân của subnet mask")
             button#calculateNetworkButton Tính tổng đường mạng
     div 
         .content(style="display:flex;flex-flow: column nowrap;align-items:start")
