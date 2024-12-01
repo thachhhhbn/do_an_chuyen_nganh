@@ -5,6 +5,7 @@ module.exports.index = (req, res) => {
 
 module.exports.listModel = async (req, res) => {
   const listModel = await model.find();
+
   res.render("./../views/client/pages/listModel.pug", { listModel });
 };
 

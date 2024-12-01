@@ -177,7 +177,7 @@ btnDetail.addEventListener("click", () => {
   try {
     const usableRange = JSON.parse(btnDetail.dataset.usableRange || "[]");
     const detailContainer = document.querySelector(".detail_ip");
-
+  
     if (usableRange.length === 0) {
       detailContainer.innerHTML = `<p>Không có địa chỉ sử dụng được.</p>`;
     } else {
