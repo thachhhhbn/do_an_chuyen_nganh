@@ -8,7 +8,7 @@ const modelSchema = new mongoose.Schema(
         chuyen_nganh: String,
         ngaysinh: String,
         vaitro: String,
-        description: String,
+        decription: String,
     }
 );
 const model = mongoose.model("students", modelSchema);
