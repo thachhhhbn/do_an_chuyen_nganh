@@ -66,6 +66,47 @@ function cidrToSubnetMask(cidr) {
     .join(".");
 }
 
+// Hàm hỗ trợ chuyển IP sang số nguyên
+function ipToNumber(ip) {
+  return ip
+    .split(".")
+    .map(Number)
+    .reduce((acc, octet) => (acc << 8) + octet, 0);
+}
+
+// Hàm hỗ trợ chuyển số nguyên sang IP
+function numberToIp(num) {
+  return [
+    (num >>> 24) & 0xff,
+    (num >>> 16) & 0xff,
+    (num >>> 8) & 0xff,
+    num & 0xff,
+  ].join(".");
+}
+
+// Hàm tăng/giảm giá trị IP
+function incrementIp(ip, increment) {
+  const ipNumber = ipToNumber(ip);
+  return numberToIp(ipNumber + increment);
+}
+
+// Hàm chuyển CIDR thành Subnet Mask
+function cidrToSubnetMask(cidr) {
+  return numberToIp((~(Math.pow(2, 32 - cidr) - 1)) >>> 0);
+}
+
+function calculateNetworkAddress(ip, subnetMask) {
+  const ipNumber = ipToNumber(ip);
+  const maskNumber = ipToNumber(subnetMask);
+  return numberToIp(ipNumber & maskNumber);
+}
+function calculateBroadcastAddress(networkAddress, subnetMask) {
+  const networkNumber = ipToNumber(networkAddress);
+  const maskNumber = ipToNumber(subnetMask);
+  const wildcard = ~maskNumber >>> 0; // Lấy wildcard mask (ngược lại của subnet mask)
+  return numberToIp(networkNumber | wildcard);
+}
+
 // Hàm tính toán thông tin subnet
 function calculateSubnet(ip, cidr) {
   if (!validateIp(ip)) {
@@ -75,13 +116,9 @@ function calculateSubnet(ip, cidr) {
     throw new Error("CIDR không hợp lệ.");
   }
 
-  const binaryIp = ipToBinary(ip).replace(/\./g, "");
-  const networkBinary = binaryIp.slice(0, cidr).padEnd(32, "0");
-  const broadcastBinary = binaryIp.slice(0, cidr).padEnd(32, "1");
-
   const subnetMask = cidrToSubnetMask(cidr);
-  const networkAddress = binaryToIp(networkBinary);
-  const broadcastAddress = binaryToIp(broadcastBinary);
+  const networkAddress = calculateNetworkAddress(ip, subnetMask);
+  const broadcastAddress = calculateBroadcastAddress(networkAddress, subnetMask);
 
   const totalAddresses = Math.pow(2, 32 - cidr);
   const usableAddresses = totalAddresses > 2 ? totalAddresses - 2 : 0;
@@ -89,24 +126,16 @@ function calculateSubnet(ip, cidr) {
   // Tạo usableRange
   const usableRange = [];
   if (usableAddresses > 0) {
-    const firstHostBinary = (parseInt(networkBinary, 2) + 1)
-      .toString(2)
-      .padStart(32, "0");
-    const lastHostBinary = (parseInt(broadcastBinary, 2) - 1)
-      .toString(2)
-      .padStart(32, "0");
+    const firstHost = incrementIp(networkAddress, 1);
+    const lastHost = incrementIp(broadcastAddress, -1);
 
-    let currentHostBinary = firstHostBinary;
+    let currentHost = firstHost;
     while (
-      parseInt(currentHostBinary, 2) <= parseInt(lastHostBinary, 2) &&
+      ipToNumber(currentHost) <= ipToNumber(lastHost) &&
       usableRange.length < usableAddresses
     ) {
-      usableRange.push(binaryToIp(currentHostBinary));
-      currentHostBinary = (
-        parseInt(currentHostBinary, 2) + 1
-      )
-        .toString(2)
-        .padStart(32, "0");
+      usableRange.push(currentHost);
+      currentHost = incrementIp(currentHost, 1);
     }
   }
 
