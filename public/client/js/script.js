@@ -365,7 +365,7 @@ btnDetail.addEventListener("click", () => {
     range_add.forEach((address, index) => {
       tableHtml += `<tr><td>${
         index + 1
-      }</td><td>${address} co: ${so_host} host</td></tr>`;
+      }</td><td>${address}</td></tr>`;
     });
 
     tableHtml += `</tbody></table>`;
