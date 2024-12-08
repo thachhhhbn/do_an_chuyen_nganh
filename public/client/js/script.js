@@ -309,7 +309,8 @@ btnCalculate.addEventListener("click", () => {
   const subnetMask = parseInt(
     document.querySelector('input[name="subnet-mask"]').value
   );
-
+  var octets = ip.split(".");
+  var subnet = cidrToSubnetMask(subnetMask);
   if (
     !validateIp(ip) ||
     isNaN(subnetMask) ||
@@ -330,8 +331,8 @@ btnCalculate.addEventListener("click", () => {
     subnet[3]
   );
   let tong_so_duong_mang = 0;
-  range_add.forEach((item) => {
-    tong_so_duong_mang = item++;
+  range_add.forEach(() => {
+    tong_so_duong_mang ++;
   });
   const bit_host = 32 - subnetMask;
   const so_host_co_the_dung = Math.pow(2, bit_host) - 2;
