@@ -163,16 +163,15 @@ input[type="text"]:focus {
 /*css ngang cho 2 container*/
 .content {
   display: flex;
-  flex-direction: column; /* Thay vì row để sắp xếp theo chiều dọc */
-  align-items: center; /* Căn giữa theo chiều ngang */
-  justify-content: flex-start; /* Căn nội dung từ trên xuống */
+  flex-direction: row; /* Thay vì row để sắp xếp theo chiều dọc */
+ justify-content: flex-start; /* Căn nội dung từ trên xuống */
   gap: 20px; /* Tạo khoảng cách giữa các phần tử */
   padding: 20px; /* Khoảng cách bên trong */
 }
 
 /* Result Section */
 .result {
-  margin-top: 20px;
+  width: max-content;
   background-color: rgba(248, 249, 250, 0.9);
   padding: 15px;
   border-radius: 6px;
@@ -313,54 +312,7 @@ button:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Thẻ sinh viên */
-.student-card {
-  display: flex;
-  flex-flow: row nowrap;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  text-align: center;
-  margin: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  vertical-align: top;
-}
 
-.student-img {
-  width: 150px; /* Chiều rộng cố định cho ảnh */
-  height: 150px; /* Chiều cao cố định cho ảnh */
-  border-radius: 50%; /* Làm ảnh thành hình tròn */
-  object-fit: cover; /* Giúp ảnh tự động căn chỉnh để lấp đầy khung hình tròn */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px; /* Khoảng cách phía dưới ảnh */
-}
-
-.student-card h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.student-card button {
-  /*padding: 10px 20px;*/
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.student-card button:hover {
-  background-color: #45a049;
-}
-
-/* Phần thông tin chi tiết sinh viên */
-.student-details {
-  margin-top: 20px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
 
 .card-model {
   padding: 4px 12px 0;
@@ -527,5 +479,139 @@ button:hover {
   background-color: #0056b3; /* Màu nền khi hover */
   transform: scale(1.05); /* Hiệu ứng phóng to nhẹ */
 }
+/* responsive */
+/* Responsive layout for smaller screens */
+@media (max-width: 1200px) {
+  .container {
+    padding: 15px;
+    max-width: 100%;
+  }
+  .header {
+    font-size: 24px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .header .left-header a, .header .right-header a {
+    margin: 10px 0;
+  }
+  .center {
+    flex-direction: column;
+    min-height: auto;
+    padding: 20px;
+  }
+  .footer {
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .navbar ul {
+    flex-direction: column;
+  }
+  .navbar ul li {
+    margin-bottom: 10px;
+  }
+}
 
+@media (max-width: 992px) {
+  .container {
+    max-width: 90%;
+  }
+  .main-title {
+    font-size: 2em;
+  }
+  .input input[type="text"] {
+    padding: 8px;
+    font-size: 14px;
+  }
+  .result {
+    padding: 12px;
+  }
+  .btn-chitiet {
+    width: 80%;
+    margin: auto;
+  }
+  .btn-secondary {
+    padding: 6px;
+    font-size: 12px;
+  }
+  .student-detail-img {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+  .header {
+    font-size: 20px;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 10px;
+  }
+  .navbar {
+    padding: 10px;
+  }
+  .navbar ul {
+    flex-direction: column;
+    padding: 0;
+  }
+  .navbar ul li {
+    margin-bottom: 8px;
+  }
+  .footer {
+    padding: 15px 10px;
+  }
+  .title_btn_back {
+    flex-direction: column;
+    align-items: center;
+  }
+  .content {
+    padding: 10px;
+  }
+  .btn_chitiet {
+    width: 100%;
+  }
+  .student-info {
+    padding-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+    max-width: 100%;
+  }
+  .header {
+    font-size: 18px;
+    margin-top: 5px;
+    text-align: center;
+  }
+  .input input[type="text"] {
+    padding: 6px;
+    font-size: 12px;
+  }
+  .btn-chitiet {
+    width: 100%;
+    padding: 10px;
+  }
+  .footer {
+    padding: 10px;
+  }
+  .title_btn_back {
+    padding: 8px;
+    font-size: 16px;
+  }
+  .student-detail-img {
+    width: 100px;
+    height: 100px;
+  }
+  .back-button {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+/* end responsive */
 

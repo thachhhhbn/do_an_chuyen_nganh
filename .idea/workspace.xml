@@ -5,9 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b565d2f3-6ecc-496e-bb1a-157a12cf093a" name="Changes" comment="fix: calculator and connect db">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/config/database.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/home.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/home.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/student.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/student.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/client/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/client/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/client/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/client/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/home.router.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/home.router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/client/layouts/index.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/client/layouts/index.pug" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/client/pages/calculator.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/client/pages/calculator.pug" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/client/pages/detailModel.pug" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/client/pages/listModel.pug" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +71,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/iambn/OneDrive/Máy tính/Projects/do_an_chuyen_nganh&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/workspaces/projects/do_an_chuyen_nganh&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -72,7 +85,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-WS-243.21565.180" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-WS-243.22562.112" />
       </set>
     </attachedChunks>
   </component>
@@ -104,6 +117,8 @@
       <workItem from="1732645275042" duration="12037000" />
       <workItem from="1732818981457" duration="54000" />
       <workItem from="1732863834726" duration="401000" />
+      <workItem from="1733642912690" duration="55000" />
+      <workItem from="1733643100154" duration="614000" />
     </task>
     <task id="LOCAL-00001" summary="fix: calculator and connect db">
       <option name="closed" value="true" />

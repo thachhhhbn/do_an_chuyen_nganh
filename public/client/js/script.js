@@ -8,7 +8,11 @@ function ipToBinary(ip) {
 
 // Hàm chuyển đổi CIDR sang subnet mask nhị phân
 function cidrToSubnetMaskBinary(cidr) {
-  return "".padStart(cidr, "1").padEnd(32, "0").match(/.{1,8}/g).join(".");
+  return ""
+    .padStart(cidr, "1")
+    .padEnd(32, "0")
+    .match(/.{1,8}/g)
+    .join(".");
 }
 
 // Hàm kiểm tra IP hợp lệ
@@ -24,16 +28,18 @@ function validateIp(ip) {
 }
 
 // Sự kiện hiển thị mã nhị phân của IP
-document.querySelector('input[name="ip"]').addEventListener("input", (event) => {
-  const ip = event.target.value;
-  const ipBinaryInput = document.querySelector(".ip_binary");
+document
+  .querySelector('input[name="ip"]')
+  .addEventListener("input", (event) => {
+    const ip = event.target.value;
+    const ipBinaryInput = document.querySelector(".ip_binary");
 
-  if (validateIp(ip)) {
-    ipBinaryInput.value = ipToBinary(ip);
-  } else {
-    ipBinaryInput.value = "IP không hợp lệ";
-  }
-});
+    if (validateIp(ip)) {
+      ipBinaryInput.value = ipToBinary(ip);
+    } else {
+      ipBinaryInput.value = "IP không hợp lệ";
+    }
+  });
 
 // Sự kiện hiển thị mã nhị phân của subnet mask
 document
@@ -66,93 +72,239 @@ function cidrToSubnetMask(cidr) {
     .join(".");
 }
 
-// Hàm hỗ trợ chuyển IP sang số nguyên
-function ipToNumber(ip) {
-  return ip
-    .split(".")
-    .map(Number)
-    .reduce((acc, octet) => (acc << 8) + octet, 0);
+
+//ham moi
+//thuc hien phep and de tinh subnet id
+function getSubnetID(adrbyte, maskbyte) {
+  return (adrbyte & maskbyte).toString();
+}
+// tinh broadcast bang phep xor
+function getBroadcastAddress(adrbyte, maskbyte) {
+  const invertedMask = 255 - maskbyte; // Calculate inverted netmask by subtracting from 255
+  return (adrbyte | invertedMask).toString(); // Perform OR between IP byte and inverted netmask byte
+}
+// Chuyển đổi một byte thành chuỗi nhị phân
+function convertToBinary(byte) {
+  return byte.toString(2).padStart(8, "0"); // Đảm bảo luôn có 8 bit
 }
 
-// Hàm hỗ trợ chuyển số nguyên sang IP
-function numberToIp(num) {
-  return [
-    (num >>> 24) & 0xff,
-    (num >>> 16) & 0xff,
-    (num >>> 8) & 0xff,
-    num & 0xff,
-  ].join(".");
-}
+// Tính số lượng địa chỉ khả dụng trong subnet
+function getNumberOfAddresses(maskbyte1, maskbyte2, maskbyte3, maskbyte4) {
+  // Chuyển các byte của subnet mask thành chuỗi nhị phân
+  let netmask =
+    convertToBinary(maskbyte1) +
+    convertToBinary(maskbyte2) +
+    convertToBinary(maskbyte3) +
+    convertToBinary(maskbyte4);
 
-// Hàm tăng/giảm giá trị IP
-function incrementIp(ip, increment) {
-  const ipNumber = ipToNumber(ip);
-  return numberToIp(ipNumber + increment);
-}
+  let exponent = 0;
 
-// Hàm chuyển CIDR thành Subnet Mask
-function cidrToSubnetMask(cidr) {
-  return numberToIp((~(Math.pow(2, 32 - cidr) - 1)) >>> 0);
-}
-
-function calculateNetworkAddress(ip, subnetMask) {
-  const ipNumber = ipToNumber(ip);
-  const maskNumber = ipToNumber(subnetMask);
-  return numberToIp(ipNumber & maskNumber);
-}
-function calculateBroadcastAddress(networkAddress, subnetMask) {
-  const networkNumber = ipToNumber(networkAddress);
-  const maskNumber = ipToNumber(subnetMask);
-  const wildcard = ~maskNumber >>> 0; // Lấy wildcard mask (ngược lại của subnet mask)
-  return numberToIp(networkNumber | wildcard);
-}
-
-// Hàm tính toán thông tin subnet
-function calculateSubnet(ip, cidr) {
-  if (!validateIp(ip)) {
-    throw new Error("Địa chỉ IP không hợp lệ.");
-  }
-  if (isNaN(cidr) || cidr < 0 || cidr > 32) {
-    throw new Error("CIDR không hợp lệ.");
-  }
-
-  const subnetMask = cidrToSubnetMask(cidr);
-  const networkAddress = calculateNetworkAddress(ip, subnetMask);
-  const broadcastAddress = calculateBroadcastAddress(networkAddress, subnetMask);
-
-  const totalAddresses = Math.pow(2, 32 - cidr);
-  const usableAddresses = totalAddresses > 2 ? totalAddresses - 2 : 0;
-
-  // Tạo usableRange
-  const usableRange = [];
-  if (usableAddresses > 0) {
-    const firstHost = incrementIp(networkAddress, 1);
-    const lastHost = incrementIp(broadcastAddress, -1);
-
-    let currentHost = firstHost;
-    while (
-      ipToNumber(currentHost) <= ipToNumber(lastHost) &&
-      usableRange.length < usableAddresses
-    ) {
-      usableRange.push(currentHost);
-      currentHost = incrementIp(currentHost, 1);
+  // Đếm số lượng bit 0 trong subnet mask
+  for (let counter = 0; counter <= 31; counter++) {
+    if (netmask[counter] === "0") {
+      exponent++;
     }
   }
 
-  return {
-    subnetMask,
-    networkAddress,
-    broadcastAddress,
-    totalAddresses,
-    usableAddresses,
-    usableRange,
-  };
+  // Tính số lượng địa chỉ khả dụng trong subnet (sau khi trừ đi 2 địa chỉ đặc biệt)
+  return Math.pow(2, exponent) - 2;
+}
+// Chuyển đổi byte thành chuỗi nhị phân
+function convertToBinary(byte) {
+  return byte.toString(2).padStart(8, "0"); // Đảm bảo luôn có 8 bit
 }
 
+// Tìm bit 1 cao nhất trong subnet mask
+function getHighestBit(maskbyte1, maskbyte2, maskbyte3, maskbyte4) {
+  // Kết hợp tất cả các byte vào một chuỗi nhị phân dài 32 bit
+  let netmask =
+    convertToBinary(maskbyte1) +
+    convertToBinary(maskbyte2) +
+    convertToBinary(maskbyte3) +
+    convertToBinary(maskbyte4);
+
+  let bit = 0;
+
+  // Duyệt qua từng bit trong chuỗi nhị phân
+  for (let counter = 0; counter <= 31; counter++) {
+    if (netmask.charAt(counter) === "1") {
+      bit = counter;
+      bit++; // Tăng chỉ số bit
+    } else if (netmask.charAt(counter) === "0") {
+      counter = 32; // Kết thúc vòng lặp khi gặp bit 0
+    }
+  }
+  return bit;
+}
+// Chuyển đổi byte thành chuỗi nhị phân
+function convertToBinary(byte) {
+  return byte.toString(2).padStart(8, "0");
+}
+
+// Tìm bit 1 cao nhất trong subnet mask
+function getHighestBit(maskbyte1, maskbyte2, maskbyte3, maskbyte4) {
+  let netmask =
+    convertToBinary(maskbyte1) +
+    convertToBinary(maskbyte2) +
+    convertToBinary(maskbyte3) +
+    convertToBinary(maskbyte4);
+  let bit = 0;
+
+  for (let counter = 0; counter <= 31; counter++) {
+    if (netmask.charAt(counter) === "1") {
+      bit = counter;
+      bit++;
+    } else if (netmask.charAt(counter) === "0") {
+      counter = 32;
+    }
+  }
+  return bit;
+}
+
+// Tính số lượng bit 1 trong subnet mask (exponent)
+function getExponent(maskbyte1, maskbyte2, maskbyte3, maskbyte4) {
+  let bit = 0;
+  let exponent = 0;
+
+  bit = getHighestBit(maskbyte1, maskbyte2, maskbyte3, maskbyte4);
+
+  if (bit >= 1 && bit <= 8) {
+    for (let counter = 0; counter <= 7; counter++) {
+      if (convertToBinary(maskbyte1).charAt(counter) === "1") {
+        exponent++;
+      }
+    }
+  } else if (bit >= 9 && bit <= 16) {
+    for (let counter = 0; counter <= 7; counter++) {
+      if (convertToBinary(maskbyte2).charAt(counter) === "1") {
+        exponent++;
+      }
+    }
+  } else if (bit >= 17 && bit <= 24) {
+    for (let counter = 0; counter <= 7; counter++) {
+      if (convertToBinary(maskbyte3).charAt(counter) === "1") {
+        exponent++;
+      }
+    }
+  } else if (bit >= 25 && bit <= 32) {
+    for (let counter = 0; counter <= 7; counter++) {
+      if (convertToBinary(maskbyte4).charAt(counter) === "1") {
+        exponent++;
+      }
+    }
+  }
+  return exponent;
+}
+// Hàm tính số lượng subnet có thể tạo từ subnet mask
+function getNumberOfSubnets(maskbyte1, maskbyte2, maskbyte3, maskbyte4) {
+  return Math.pow(2, getExponent(maskbyte1, maskbyte2, maskbyte3, maskbyte4));
+}
+
+function getAvailableSubnets(
+  oktett1,
+  oktett2,
+  oktett3,
+  oktett4,
+  maskbyte1,
+  maskbyte2,
+  maskbyte3,
+  maskbyte4
+) {
+  let bit = 0;
+  let exponent = 0;
+  let inkrement = 0;
+  let oktett = 0;
+
+  exponent = getExponent(maskbyte1, maskbyte2, maskbyte3, maskbyte4);
+  bit = getHighestBit(maskbyte1, maskbyte2, maskbyte3, maskbyte4);
+
+  if (bit >= 1 && bit <= 8) {
+    oktett = 1;
+  } else if (bit >= 9 && bit <= 16) {
+    oktett = 2;
+  } else if (bit >= 17 && bit <= 24) {
+    oktett = 3;
+  } else if (bit >= 25 && bit <= 32) {
+    oktett = 4;
+  }
+
+  let subnets = new Array(Math.pow(2, exponent));
+
+  inkrement = Math.pow(
+    2,
+    8 - getExponent(maskbyte1, maskbyte2, maskbyte3, maskbyte4)
+  );
+
+  switch (oktett) {
+    case 1:
+      for (let counter = 0; counter <= 255 / inkrement - 1; counter++) {
+        subnets[counter] = counter * inkrement + ".0.0.0";
+      }
+      subnets[Math.pow(2, exponent) - 1] =
+        Math.pow(2, exponent) * inkrement - 1 + ".0.0.0";
+      break;
+    case 2:
+      for (let counter = 0; counter <= 255 / inkrement - 1; counter++) {
+        subnets[counter] = oktett1 + "." + counter * inkrement + ".0.0";
+      }
+      subnets[Math.pow(2, exponent) - 1] =
+        oktett1 + "." + (Math.pow(2, exponent) * inkrement - 1) + ".0.0";
+      break;
+    case 3:
+      for (let counter = 0; counter <= 255 / inkrement - 1; counter++) {
+        subnets[counter] =
+          oktett1 + "." + oktett2 + "." + counter * inkrement + ".0";
+      }
+      subnets[Math.pow(2, exponent) - 1] =
+        oktett1 +
+        "." +
+        oktett2 +
+        "." +
+        (Math.pow(2, exponent) * inkrement - 1) +
+        ".0";
+      break;
+    case 4:
+      for (let counter = 0; counter <= 255 / inkrement - 1; counter++) {
+        subnets[counter] =
+          oktett1 + "." + oktett2 + "." + oktett3 + "." + counter * inkrement;
+      }
+      subnets[Math.pow(2, exponent) - 1] =
+        oktett1 +
+        "." +
+        oktett2 +
+        "." +
+        oktett3 +
+        "." +
+        (Math.pow(2, exponent) * inkrement - 1);
+      break;
+  }
+
+  return subnets;
+}
+//chuyen tu 29 sang 255.255.255.248
+function cidrToSubnetMask(cidr) {
+  let maskLength = parseInt(cidr, 10); // Lấy phần CIDR từ số nhập vào
+  const mask = [];
+
+  for (let i = 0; i < 4; i++) {
+    if (maskLength >= 8) {
+      mask.push(255); // Các octet đầu tiên đều là 255 (tương ứng với 11111111)
+      maskLength -= 8;
+    } else {
+      mask.push(256 - Math.pow(2, 8 - maskLength)); // Tính giá trị octet còn lại
+      maskLength = 0; // Đã xử lý hết bit CIDR
+    }
+  }
+
+  return mask;
+}
+
+//end ham moi
 // Sự kiện tính toán mạng và hiển thị kết quả
 const btnCalculate = document.querySelector("#calculateNetworkButton");
 const btnDetail = document.querySelector(".btn_chitiet");
-
+const resultContainer = document.querySelector('.result-container');
+const detailTable=document.querySelector(".detail_ip")
 btnCalculate.addEventListener("click", () => {
   const ip = document.querySelector('input[name="ip"]').value;
   const subnetMask = parseInt(
@@ -168,57 +320,62 @@ btnCalculate.addEventListener("click", () => {
     alert("Vui lòng nhập địa chỉ IP và Subnet Mask hợp lệ (0-32)");
     return;
   }
-
-  try {
-    const result = calculateSubnet(ip, subnetMask);
-
-    // Hiển thị bảng kết quả
-    const resultContainer = document.querySelector(".result-container");
-    resultContainer.innerHTML = `
-            <table border="1" style="border-collapse: collapse; width: 100%; text-align: left;">
-                <tr>
-                    <th>Subnet Mask</th>
-                    <th>Network Address</th>
-                    <th>Broadcast Address</th>
-                    <th>Total Addresses</th>
-                    <th>Usable Addresses</th>
-                </tr>
-                <tr>
-                    <td>${result.subnetMask}</td>
-                    <td>${result.networkAddress}</td>
-                    <td>${result.broadcastAddress}</td>
-                    <td>${result.totalAddresses}</td>
-                    <td>${result.usableAddresses}</td>
-                </tr>
-            </table>
-        `;
-    resultContainer.style.display = "block";
-
-    btnDetail.dataset.usableRange = JSON.stringify(result.usableRange); // Cập nhật dữ liệu usableRange
-    btnDetail.style.display = "block"; // Hiển thị nút
-  } catch (error) {
-    console.error("Lỗi:", error.message);
-    alert("Đã xảy ra lỗi khi tính toán. Vui lòng kiểm tra lại dữ liệu đầu vào.");
-  }
+  const bit_host = 32 - subnetMask;
+  const so_host_co_the_dung = Math.pow(2, bit_host) - 2;
+  resultContainer.innerHTML = `
+    so bit host con lai la: ${bit_host} <br> 
+    so host co the dung la: ${so_host_co_the_dung} <br>
+  `;
+  resultContainer.style.display = "block";
+  btnDetail.style.display = "block";
 });
 
 btnDetail.addEventListener("click", () => {
-  try {
-    const usableRange = JSON.parse(btnDetail.dataset.usableRange || "[]");
-    const detailContainer = document.querySelector(".detail_ip");
+  const ip = document.querySelector('input[name="ip"]').value;
+  const subnetMask = parseInt(
+    document.querySelector('input[name="subnet-mask"]').value
+  );
+
+  var octets = ip.split(".");
+  var subnet = cidrToSubnetMask(subnetMask);
+  var range_add = getAvailableSubnets(
+    octets[0],
+    octets[1],
+    octets[2],
+    octets[3],
+    subnet[0],
+    subnet[1],
+    subnet[2],
+    subnet[3]
+  );
+  const so_host = getNumberOfSubnets(
+    octets[0],
+    octets[1],
+    octets[2],
+    octets[3]
+  );
   
-    if (usableRange.length === 0) {
-      detailContainer.innerHTML = `<p>Không có địa chỉ sử dụng được.</p>`;
-    } else {
-      detailContainer.innerHTML = `<p>Danh sách địa chỉ sử dụng được:</p><ul>`;
-      usableRange.forEach((address, index) => {
-        detailContainer.innerHTML += `<li>${index + 1}. ${address}</li>`;
-      });
-      detailContainer.innerHTML += `</ul>`;
-    }
-    detailContainer.style.display = "block";
-  } catch (error) {
-    console.error("Lỗi:", error.message);
-    alert("Đã xảy ra lỗi khi hiển thị danh sách chi tiết.");
+  resultContainer.innerHTML = ``;
+  // detailTable.style.display = "block";
+  // Nếu có các dãy IP, tạo bảng
+  if (range_add && range_add.length > 0) {
+    let tableHtml = `<table border="1"><thead><tr><th>#</th><th>Subnet Address</th></tr></thead><tbody>`;
+
+    // Lặp qua mảng và tạo các dòng cho bảng
+    range_add.forEach((address, index) => {
+      tableHtml += `<tr><td>${
+        index + 1
+      }</td><td>${address} co: ${so_host} host</td></tr>`;
+    });
+
+    tableHtml += `</tbody></table>`;
+
+    // Hiển thị bảng trong resultContainer
+    resultContainer.innerHTML = tableHtml;
+    // detailTable.style.display = "block";
+    btnDetail.style.display="none"
+  } else {
+    detailTable.innerHTML = "<p>Không có dãy IP khả dụng.</p>";
+    d.style.display = "block";
   }
 });

@@ -1,8 +1,8 @@
 extends ../layouts/index
 
 block content
-    .content
-        #calculator.container.cal
+    .content 
+        div#calculator.container.cal
             h1 Subnet Calculator
             .content
                 .input
@@ -16,8 +16,8 @@ block content
                             input(style='max-width: 100px; margin-left: 20px' type='text' name='subnet-mask' placeholder='CIDR (VD: 29)')
                             input(disabled type='text' class="subnet_binary" placeholder="Mã nhị phân của subnet mask")
             button#calculateNetworkButton Tính tổng đường mạng
-    div 
-        .content(style="display:flex;flex-flow: column nowrap;align-items:start")
-            .result-container.result(style="display:none")
-            button(class="btn_chitiet" style="display:none") Chi tiết
-        .result.detail_ip(style="display:none; max-height: 170px; margin-top:12px")
+        div 
+            .content(style="display:flex;flex-flow: column nowrap;align-items:start")
+                .result-container.result(style="display: none; max-height: 375px;")
+                button(class="btn_chitiet" style="display:none") Chi tiết
+            .result.detail_ip(style="display:none; max-height: 170px; margin-top:12px")

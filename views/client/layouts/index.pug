@@ -6,17 +6,20 @@ html(lang="en")
         title IPv4 
         link(rel="stylesheet" href="/client/css/style.css")
 
+        script(src='IpSubnetCalculator.js')
 
-    body
-        .main
-            //header
-            .top(id="top")
-                include ../partials/header.pug
-            //content
-            .center
-                block content
-            //footer
-            include ../partials/footer.pug
+
+
+        body
+            .main
+                //header
+                .top(id="top")
+                    include ../partials/header.pug
+                //content
+                .center
+                    block content
+                //footer
+                include ../partials/footer.pug
 
 script(src="./client/js/script.js")
 
