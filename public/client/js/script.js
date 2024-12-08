@@ -72,7 +72,6 @@ function cidrToSubnetMask(cidr) {
     .join(".");
 }
 
-
 //ham moi
 //thuc hien phep and de tinh subnet id
 function getSubnetID(adrbyte, maskbyte) {
@@ -303,8 +302,8 @@ function cidrToSubnetMask(cidr) {
 // Sự kiện tính toán mạng và hiển thị kết quả
 const btnCalculate = document.querySelector("#calculateNetworkButton");
 const btnDetail = document.querySelector(".btn_chitiet");
-const resultContainer = document.querySelector('.result-container');
-const detailTable=document.querySelector(".detail_ip")
+const resultContainer = document.querySelector(".result-container");
+const detailTable = document.querySelector(".detail_ip");
 btnCalculate.addEventListener("click", () => {
   const ip = document.querySelector('input[name="ip"]').value;
   const subnetMask = parseInt(
@@ -320,11 +319,27 @@ btnCalculate.addEventListener("click", () => {
     alert("Vui lòng nhập địa chỉ IP và Subnet Mask hợp lệ (0-32)");
     return;
   }
+  var range_add = getAvailableSubnets(
+    octets[0],
+    octets[1],
+    octets[2],
+    octets[3],
+    subnet[0],
+    subnet[1],
+    subnet[2],
+    subnet[3]
+  );
+  let tong_so_duong_mang = 0;
+  range_add.forEach((item) => {
+    tong_so_duong_mang = item++;
+  });
   const bit_host = 32 - subnetMask;
   const so_host_co_the_dung = Math.pow(2, bit_host) - 2;
   resultContainer.innerHTML = `
-    so bit host con lai la: ${bit_host} <br> 
-    so host co the dung la: ${so_host_co_the_dung} <br>
+    So bit host con lai la: ${bit_host} <br> 
+    So host co the dung la: ${so_host_co_the_dung} <br>
+    Tong so duong mang co the dung la: ${tong_so_duong_mang} <br>
+
   `;
   resultContainer.style.display = "block";
   btnDetail.style.display = "block";
@@ -348,13 +363,7 @@ btnDetail.addEventListener("click", () => {
     subnet[2],
     subnet[3]
   );
-  const so_host = getNumberOfSubnets(
-    octets[0],
-    octets[1],
-    octets[2],
-    octets[3]
-  );
-  
+
   resultContainer.innerHTML = ``;
   // detailTable.style.display = "block";
   // Nếu có các dãy IP, tạo bảng
@@ -363,9 +372,7 @@ btnDetail.addEventListener("click", () => {
 
     // Lặp qua mảng và tạo các dòng cho bảng
     range_add.forEach((address, index) => {
-      tableHtml += `<tr><td>${
-        index + 1
-      }</td><td>${address}</td></tr>`;
+      tableHtml += `<tr><td>${index + 1}</td><td>${address}</td></tr>`;
     });
 
     tableHtml += `</tbody></table>`;
@@ -373,7 +380,7 @@ btnDetail.addEventListener("click", () => {
     // Hiển thị bảng trong resultContainer
     resultContainer.innerHTML = tableHtml;
     // detailTable.style.display = "block";
-    btnDetail.style.display="none"
+    btnDetail.style.display = "none";
   } else {
     detailTable.innerHTML = "<p>Không có dãy IP khả dụng.</p>";
     d.style.display = "block";
