@@ -55,11 +55,18 @@ document
     }
   });
 
-// Hàm chuyển đổi từ nhị phân sang IP
+// // Hàm chuyển đổi từ nhị phân sang IP
+function newBinaryToIp(binary) {
+  return binary
+    .split(".")
+    .map((octet) => parseInt(octet, 2))
+    .join(".");
+}
+
 function binaryToIp(binary) {
   return binary
-    .match(/.{1,8}/g)
-    .map((bin) => parseInt(bin, 2))
+    .split(".") // Tách chuỗi theo dấu chấm
+    .map((octet) => parseInt(octet.padStart(8, "0"), 2)) // Đảm bảo mỗi phần có 8 bit
     .join(".");
 }
 
@@ -297,7 +304,63 @@ function cidrToSubnetMask(cidr) {
 
   return mask;
 }
+function subnetToWildcard(subnetMask) {
+  // Chia Subnet Mask thành các octet
+  let subnetOctets = subnetMask.map(Number);
 
+  // Tính Wildcard Mask bằng cách lấy bổ sung (255 - octet)
+  let wildcardOctets = subnetOctets.map((octet) => 255 - octet);
+
+  return wildcardOctets.join(".");
+}
+
+function getNewBroadcastAddress(ip_binary, wildcardMask_binary) {
+  // Chuyển các chuỗi nhị phân thành các số thập phân (từng byte)
+  let ip_bytes = ip_binary.split(".").map((octet) => parseInt(octet, 2));
+  let wildcard_bytes = wildcardMask_binary
+    .split(".")
+    .map((octet) => parseInt(octet, 2));
+
+  // Thực hiện phép toán OR bitwise trên từng byte
+  let broadcast_bytes = ip_bytes.map(
+    (byte, index) => byte | wildcard_bytes[index]
+  );
+
+  // Chuyển lại các byte broadcast thành nhị phân và ghép lại thành chuỗi
+  return broadcast_bytes
+    .map((byte) => byte.toString(2).padStart(8, "0"))
+    .join(".");
+}
+
+// Hàm chuyển đổi IP thành mảng các octet
+function ipToOctets(ip) {
+  return ip.split(".").map(Number);
+}
+
+// Hàm chuyển đổi mảng các octet thành IP
+function octetsToIp(octets) {
+  return octets.join(".");
+}
+
+// Hàm tính dải địa chỉ host từ địa chỉ mạng và địa chỉ broadcast
+function calculateHostRange(networkAddress, broadcastAddress) {
+  const networkOctets = ipToOctets(networkAddress);
+  const broadcastOctets = ipToOctets(broadcastAddress);
+
+  // Tính địa chỉ host đầu tiên
+  const firstHostOctets = [...networkOctets];
+  firstHostOctets[3] += 1; // Cộng 1 vào octet cuối cùng
+
+  // Tính địa chỉ host cuối cùng
+  const lastHostOctets = [...broadcastOctets];
+  lastHostOctets[3] -= 1; // Trừ 1 vào octet cuối cùng
+
+  // Chuyển đổi lại thành địa chỉ IP
+  const firstHost = octetsToIp(firstHostOctets);
+  const lastHost = octetsToIp(lastHostOctets);
+
+  return { firstHost, lastHost };
+}
 //end ham moi
 // Sự kiện tính toán mạng và hiển thị kết quả
 const btnCalculate = document.querySelector("#calculateNetworkButton");
@@ -332,16 +395,16 @@ btnCalculate.addEventListener("click", () => {
   );
   let tong_so_duong_mang = 0;
   range_add.forEach(() => {
-    tong_so_duong_mang ++;
+    tong_so_duong_mang++;
   });
   const bit_host = 32 - subnetMask;
   const so_host_co_the_dung = Math.pow(2, bit_host) - 2;
   resultContainer.innerHTML = `
-    So bit host con lai la: ${bit_host} <br> 
-    So host co the dung la: ${so_host_co_the_dung} <br>
-    Tong so duong mang co the dung la: ${tong_so_duong_mang} <br>
-
-  `;
+      So bit host con lai la: ${bit_host} <br> 
+      So host co the dung la: ${so_host_co_the_dung} <br>
+      Tong so duong mang co the dung la: ${tong_so_duong_mang} <br>
+  
+    `;
   resultContainer.style.display = "block";
   btnDetail.style.display = "block";
 });
@@ -369,11 +432,26 @@ btnDetail.addEventListener("click", () => {
   // detailTable.style.display = "block";
   // Nếu có các dãy IP, tạo bảng
   if (range_add && range_add.length > 0) {
-    let tableHtml = `<table border="1"><thead><tr><th>#</th><th>Subnet Address</th></tr></thead><tbody>`;
+    let tableHtml = `<table border="1"><thead><tr><th></th><th>Địa chỉ đường mạng</th>
+      <th>Địa chỉ có thể sử dụng</th>
+      <th>Địa chỉ broadcast</th>
+      </tr>
+      </thead><tbody>`;
 
     // Lặp qua mảng và tạo các dòng cho bảng
     range_add.forEach((address, index) => {
-      tableHtml += `<tr><td>${index + 1}</td><td>${address} </td></tr>`;
+      let ip_binary = ipToBinary(address);
+      let subnetmask = cidrToSubnetMask(subnetMask);
+      let wildcardMask = subnetToWildcard(subnetmask);
+      let broadcast = getNewBroadcastAddress(
+        ip_binary,
+        ipToBinary(wildcardMask)
+      );
+      const range = calculateHostRange(address, binaryToIp(broadcast));
+
+      tableHtml += `<tr><td>${index + 1}</td><td>${address} </td><td>${
+        range.firstHost + " ->" + range.lastHost
+      } </td><td>${binaryToIp(broadcast)} </td></tr>`;
     });
 
     tableHtml += `</tbody></table>`;

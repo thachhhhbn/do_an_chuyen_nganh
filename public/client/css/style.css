@@ -30,16 +30,12 @@
   flex: 1px;
 }
 
-.header > .left-header a {
-  text-decoration: none;
-  background-color: #ff8000;
-  color: #ffffff;
-  border-radius: 4px;
+.header > .left-header {
+  font-size: 20px;
   display: flex;
-  width: 116px;
-  height: 52px;
-  align-items: center;
   justify-content: center;
+  align-items: start;
+  flex-flow: column;
   margin-left: 16px;
 }
 
@@ -145,7 +141,7 @@ label {
 
 /* Input Field Styling */
 input[type="text"] {
-  width: 100%;
+  width: -webkit-fill-available;
   padding: 10px;
   border-radius: 6px;
   border: 1px solid #ccc;

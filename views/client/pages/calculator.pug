@@ -2,22 +2,23 @@ extends ../layouts/index
 
 block content
     .content 
-        div#calculator.container.cal
+        div#calculator.container.cal(style="min-width:524px")
             h1 Subnet Calculator
-            .content
+            h2 
+            div
                 .input
-                    div
+                    div(style="display: flex;justify-content: initial; align-items: start;flex-flow: column;")
                         label(for='ip') Địa chỉ IP:
                         input(type='text' name='ip' placeholder='Vui lòng nhập địa chỉ IP')
                         input(disabled type="text" class="ip_binary" placeholder="Mã nhị phân của IP")
                     div
-                        .subnet-mask
+                        .subnet-mask(style="width=105%")
                             label(for='subnet-mask') Subnet Mask / CIDR:
                             input(style='max-width: 100px; margin-left: 20px' type='text' name='subnet-mask' placeholder='CIDR (VD: 29)')
                             input(disabled type='text' class="subnet_binary" placeholder="Mã nhị phân của subnet mask")
             button#calculateNetworkButton Tính tổng đường mạng
         div 
-            .content(style="display:flex;flex-flow: column nowrap;align-items:start")
+            .content(style="display:flex;flex-flow: column nowrap;align-items:start;width:fit-content")
                 .result-container.result(style="display: none; max-height: 375px;")
                 button(class="btn_chitiet" style="display:none") Chi tiết
             .result.detail_ip(style="display:none; max-height: 170px; margin-top:12px")
