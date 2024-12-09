@@ -373,7 +373,7 @@ btnDetail.addEventListener("click", () => {
 
     // Lặp qua mảng và tạo các dòng cho bảng
     range_add.forEach((address, index) => {
-      tableHtml += `<tr><td>${index + 1}</td><td>${address}</td></tr>`;
+      tableHtml += `<tr><td>${index + 1}</td><td>${address} </td></tr>`;
     });
 
     tableHtml += `</tbody></table>`;
