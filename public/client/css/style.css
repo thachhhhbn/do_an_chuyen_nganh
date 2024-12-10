@@ -477,58 +477,46 @@ button:hover {
 }
 /* responsive */
 /* Responsive layout for smaller screens */
+/* Responsive layout for all screen sizes */
 @media (max-width: 1200px) {
   .container {
-    padding: 15px;
-    max-width: 100%;
+    padding: 20px;
+    max-width: 90%;
   }
   .header {
     font-size: 24px;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
-  }
-  .header .left-header a, .header .right-header a {
-    margin: 10px 0;
-  }
-  .center {
-    flex-direction: column;
-    min-height: auto;
-    padding: 20px;
-  }
-  .footer {
-    padding: 20px 16px;
     text-align: center;
+    padding: 10px 0;
   }
   .navbar ul {
     flex-direction: column;
+    align-items: center;
   }
   .navbar ul li {
     margin-bottom: 10px;
   }
+  .content {
+    flex-direction: column;
+    padding: 15px;
+  }
+  .result {
+    max-width: 100%;
+    margin: 10px 0;
+  }
 }
 
 @media (max-width: 992px) {
-  .container {
-    max-width: 90%;
-  }
-  .main-title {
-    font-size: 2em;
+  .header {
+    font-size: 22px;
   }
   .input input[type="text"] {
-    padding: 8px;
     font-size: 14px;
   }
-  .result {
-    padding: 12px;
-  }
-  .btn-chitiet {
-    width: 80%;
-    margin: auto;
-  }
-  .btn-secondary {
-    padding: 6px;
-    font-size: 12px;
+  .btn_chitiet, #calculateNetworkButton {
+    width: 100%;
+    font-size: 14px;
   }
   .student-detail-img {
     width: 120px;
@@ -538,74 +526,73 @@ button:hover {
 
 @media (max-width: 768px) {
   .container {
-    padding: 10px;
+    padding: 15px;
+    max-width: 100%;
   }
   .header {
     font-size: 20px;
-    flex-direction: column;
-    text-align: center;
-    margin-top: 10px;
-  }
-  .navbar {
-    padding: 10px;
+    margin-bottom: 15px;
   }
   .navbar ul {
     flex-direction: column;
-    padding: 0;
-  }
-  .navbar ul li {
-    margin-bottom: 8px;
-  }
-  .footer {
-    padding: 15px 10px;
-  }
-  .title_btn_back {
-    flex-direction: column;
-    align-items: center;
   }
   .content {
     padding: 10px;
+    gap: 15px;
+  }
+  .student-detail-img {
+    width: 100px;
+    height: 100px;
+  }
+  #calculateNetworkButton {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding: 10px;
+  }
+  .header {
+    font-size: 18px;
+  }
+  .input input[type="text"] {
+    font-size: 12px;
+    padding: 8px;
   }
   .btn_chitiet {
-    width: 100%;
+    font-size: 12px;
   }
-  .student-info {
-    padding-top: 20px;
+  .student-detail-img {
+    width: 80px;
+    height: 80px;
+  }
+  .navbar ul {
+    gap: 10px;
   }
 }
 
 @media (max-width: 480px) {
   .container {
     padding: 10px;
-    max-width: 100%;
   }
   .header {
-    font-size: 18px;
-    margin-top: 5px;
-    text-align: center;
-  }
-  .input input[type="text"] {
-    padding: 6px;
-    font-size: 12px;
-  }
-  .btn-chitiet {
-    width: 100%;
-    padding: 10px;
-  }
-  .footer {
-    padding: 10px;
-  }
-  .title_btn_back {
-    padding: 8px;
     font-size: 16px;
   }
-  .student-detail-img {
-    width: 100px;
-    height: 100px;
+  .navbar ul li {
+    margin-bottom: 5px;
   }
-  .back-button {
-    font-size: 12px;
-    padding: 6px 12px;
+  .content {
+    padding: 5px;
+    gap: 10px;
+  }
+  .student-detail-img {
+    width: 60px;
+    height: 60px;
+  }
+  .btn_chitiet {
+    padding: 8px;
+    font-size: 10px;
   }
 }
 
