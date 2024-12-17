@@ -14,7 +14,5 @@ app.use(express.static(`${__dirname}/public`));
 // database.connect();
 router(app);
 
-
-
 app.listen(3000);
 console.log("http://localhost:" + port);

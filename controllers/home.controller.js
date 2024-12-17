@@ -1,8 +1,13 @@
 // const model = require("./../model/student.model");
 module.exports.index = (req, res) => {
-  res.render("./../views/client/pages/calculator.pug");
+  res.render("./../views/client/pages/home.pug");
 };
-
+module.exports.cidr=(req,res)=>{
+  res.render("./../views/client/pages/calculator.pug");
+}
+module.exports.vlsm=(req,res)=>{
+  res.render("./../views/client/pages/vlsm.pug");
+}
 // module.exports.listModel = async (req, res) => {
 //   const listModel = await model.find();
 
@@ -17,6 +22,6 @@ module.exports.index = (req, res) => {
 //   console.log(item);
 // };
 
-module.exports.explainTool = (req, res) => {
-  res.render("./../views/client/pages/explainTool.pug");
-};
+// module.exports.explainTool = (req, res) => {
+//   res.render("./../views/client/pages/explainTool.pug");
+// };

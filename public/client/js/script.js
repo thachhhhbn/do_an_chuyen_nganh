@@ -5,7 +5,6 @@ function ipToBinary(ip) {
     .map((octet) => parseInt(octet, 10).toString(2).padStart(8, "0"))
     .join(".");
 }
-
 // Hàm chuyển đổi CIDR sang subnet mask nhị phân
 function cidrToSubnetMaskBinary(cidr) {
   return ""
@@ -14,7 +13,6 @@ function cidrToSubnetMaskBinary(cidr) {
     .match(/.{1,8}/g)
     .join(".");
 }
-
 // Hàm kiểm tra IP hợp lệ
 function validateIp(ip) {
   const octets = ip.split(".");
@@ -80,15 +78,9 @@ function cidrToSubnetMask(cidr) {
 }
 
 //ham moi
-//thuc hien phep and de tinh subnet id
-function getSubnetID(adrbyte, maskbyte) {
-  return (adrbyte & maskbyte).toString();
-}
+
 // tinh broadcast bang phep xor
-function getBroadcastAddress(adrbyte, maskbyte) {
-  const invertedMask = 255 - maskbyte; // Calculate inverted netmask by subtracting from 255
-  return (adrbyte | invertedMask).toString(); // Perform OR between IP byte and inverted netmask byte
-}
+
 // Chuyển đổi một byte thành chuỗi nhị phân
 function convertToBinary(byte) {
   return byte.toString(2).padStart(8, "0"); // Đảm bảo luôn có 8 bit
@@ -171,9 +163,7 @@ function getHighestBit(maskbyte1, maskbyte2, maskbyte3, maskbyte4) {
 function getExponent(maskbyte1, maskbyte2, maskbyte3, maskbyte4) {
   let bit = 0;
   let exponent = 0;
-
   bit = getHighestBit(maskbyte1, maskbyte2, maskbyte3, maskbyte4);
-
   if (bit >= 1 && bit <= 8) {
     for (let counter = 0; counter <= 7; counter++) {
       if (convertToBinary(maskbyte1).charAt(counter) === "1") {
@@ -205,7 +195,6 @@ function getExponent(maskbyte1, maskbyte2, maskbyte3, maskbyte4) {
 function getNumberOfSubnets(maskbyte1, maskbyte2, maskbyte3, maskbyte4) {
   return Math.pow(2, getExponent(maskbyte1, maskbyte2, maskbyte3, maskbyte4));
 }
-
 function getAvailableSubnets(
   oktett1,
   oktett2,
@@ -363,10 +352,10 @@ function calculateHostRange(networkAddress, broadcastAddress) {
 }
 //end ham moi
 // Sự kiện tính toán mạng và hiển thị kết quả
-const btnCalculate = document.querySelector("#calculateNetworkButton");
 const btnDetail = document.querySelector(".btn_chitiet");
 const resultContainer = document.querySelector(".result-container");
 const detailTable = document.querySelector(".detail_ip");
+const btnCalculate = document.querySelector("#calculateNetworkButton");
 btnCalculate.addEventListener("click", () => {
   const ip = document.querySelector('input[name="ip"]').value;
   const subnetMask = parseInt(

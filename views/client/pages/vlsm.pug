@@ -1,0 +1,36 @@
+extends ../layouts/index
+block content     
+    #app-container
+      .title-container
+          .main-title(style="display:flex;justify-content:space-between")
+            a(href="/" style="text-decoration:none;color:#2c3e50") Quay Lại
+            p VLSM Subnetting Tool
+      // Nhập mạng gốc
+      .input-group
+        label.input-label(for='network-input') Mạng Gốc (CIDR):
+        .input-wrapper
+          input#network-input.text-input(type='text' placeholder='Ví dụ: 172.16.1.100/19')
+        .button-wrapper
+          button#next-button.primary-button Tiếp tục
+      // Nhập số lượng phòng ban
+      #department-section.hidden-section
+        label.input-label(for='department-count') Tạo Bảng
+        .input-wrapper
+          input#department-count.text-input(type='number' placeholder='Nhập số lượng phòng ban' min='1')
+        .button-wrapper
+          button#generate-button.primary-button Chia Mạng
+      // Bảng nhập số lượng host
+      #host-table-section.hidden-section
+        .section-title Nhập số lượng host cho tưngf phòng ban
+        .table-wrapper
+          table#host-table.data-table
+            thead
+              tr
+                th.table-header Phòng ban
+                th.table-header Số Lượng host
+            tbody#host-table-body
+        .button-wrapper
+          button#calculate-button.primary-button Chia Mạng
+      // Kết quả chia mạng
+      #result-section.hidden-section
+
